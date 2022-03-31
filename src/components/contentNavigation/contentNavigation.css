@@ -1,0 +1,20 @@
+.component-content-navigation {}
+
+.component-content-navigation ul {
+    padding: 0;
+    list-style: none;
+}
+
+.component-content-navigation li {
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.component-content-navigation a {
+    color: #ffffffbb;
+    font-family: "Montserrat", sans-serif;
+}
+
+.component-content-navigation a.active {
+    color: #FFFFFF
+}

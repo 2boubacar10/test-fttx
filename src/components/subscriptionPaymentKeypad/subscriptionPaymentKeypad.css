@@ -1,0 +1,8 @@
+.password-keypad-value {
+    font-size: 1.5rem !important;
+    line-height: 0;
+    text-align: center;
+    height: auto !important;
+    -webkit-text-stroke-width: 0.2em;
+    letter-spacing: 0.3em;
+}

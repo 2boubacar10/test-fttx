@@ -1,0 +1,10 @@
+.component-auth-login {}
+
+.error-login-message {
+    font-size: 12px;
+    margin-bottom: 1rem;
+    line-height: 1;
+    min-height: 30px;
+    color: #cc0000;
+    text-align: center;
+}

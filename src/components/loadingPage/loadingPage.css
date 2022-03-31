@@ -1,0 +1,19 @@
+.component-loading-page {
+    position: fixed;
+    background: #cc0000;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.component-loading-page p {
+    font-family: 'Montserrat', sans-serif !important;
+    color: #ffffffe6;
+    font-size: 19px;
+    margin-top: 1rem;
+}

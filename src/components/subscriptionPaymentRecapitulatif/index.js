@@ -1,0 +1,2 @@
+import subscriptionPaymentRecapitulatif from "./subscriptionPaymentRecapitulatif"
+export default subscriptionPaymentRecapitulatif;

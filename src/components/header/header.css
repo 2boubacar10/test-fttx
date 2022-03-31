@@ -1,0 +1,52 @@
+.component-header {}
+
+.theme-sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 99999;
+    top: 0;
+    bottom: 0;
+    left: -250px;
+    overflow-x: hidden;
+    transition: 0.5s;
+    background: #cc0000;
+
+}
+
+.content-sidebar-theme {
+    padding: 5rem 1rem;
+}
+
+@media screen and (max-height: 450px) {
+    .theme-sidenav {
+        padding-top: 15px;
+    }
+
+    .theme-sidenav a {
+        font-size: 18px;
+    }
+}
+
+.btnCloseOpenThemeSidenavMobile {
+    top: 25px;
+    font-size: 24px;
+    transition: .2s ease;
+    display: flex;
+    color: #3c3a39;
+    z-index: 9999;
+    right: 15px;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.btnCloseOpenThemeSidenavMobile.close-icon {
+    color: #ffffff;
+    right: 1.3rem;
+    position: absolute;
+}
+
+#themeBackdrop {
+    display: none;
+}

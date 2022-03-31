@@ -1,0 +1,18 @@
+.component-payment-view tr {
+    border: 1px solid transparent;
+}
+
+.component-payment-view hr {
+    margin-bottom: 10px;
+    height: 0;
+}
+
+.component-payment-view tfoot {
+    margin-bottom: 0;
+    border-color: #e5e5ea;
+    margin-top: 1rem;
+}
+
+.component-payment-view .table>:not(caption)>*>* {
+    box-shadow: inset 0 0 0 9999px #f2f2f57c;
+}

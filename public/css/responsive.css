@@ -1,0 +1,53 @@
+/* Extra large  */
+@media(min-width:1200px) {}
+
+@media(max-width:1199px) {}
+
+/* Large  */
+@media(max-width:991px) {}
+
+/* Medium */
+
+@media(min-width:992px) {}
+
+@media(min-width:768px) {}
+
+@media(max-width:767px) {
+    .redux-toastr .toastr {
+        min-height: 50px !important;
+    }
+
+    .redux-toastr .toastr .rrt-left-container .toastr-icon {
+        fill: #fff;
+        vertical-align: middle;
+        margin-top: 5px;
+        width: 25px !important;
+        height: 25px !important;
+    }
+
+    .btn-theme-step, .btn-theme-step-reverse {
+        height: 35px;
+    }
+
+}
+
+@media(max-width:575px) {
+    .bootstrap-table-custom .react-bootstrap-table-pagination-list {
+        margin-top: 1rem;
+    }
+}
+
+@media(min-width: 576px) {}
+
+@media (max-width: 499px) {}
+
+@media(max-width: 450px) {}
+
+/* SmartPhone */
+@media (max-width: 350px) {}
+
+@media (max-width: 991px) and (min-width: 768px) {}
+
+@media (max-width: 1199px) and (min-width: 992px) {}
+
+@media (max-width: 1050px) and (min-width: 992px) {}
