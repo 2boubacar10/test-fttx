@@ -502,7 +502,7 @@ class CreateSubscriptionRequest extends Component {
                                 </Modal.Header>
                                 <div className="mt-5 mb-3 flex-col itm-center">
                                     <img src={IconConfirm} className="icon-confirmation-modal mb-5" alt="icon-confirmation" />
-                                    <p className="title-confirmation-modal">
+                                    <p className="title-confirmation-modal mb-3">
                                         {this.state.aPostpaiedHasBeenSubscribed ? "La demande de souscription postpayée a bien été effectué." : "La demande de souscription prépayée a bien été effectué."}
                                         <br />
                                         {this.state.newSubscription.payment_method === "Espèce" && "Veuillez à present passer au paiement."}

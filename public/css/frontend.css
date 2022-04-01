@@ -458,6 +458,9 @@ body {
     color: #3c3a39;
     align-items: center;
 }
+.link-theme-with-icon :hover {
+    text-decoration: none !important; color: #cc0000;
+}
 
 .link-theme-with-icon svg {
     color: #3c3a39;

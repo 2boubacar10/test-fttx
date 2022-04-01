@@ -55,7 +55,7 @@ export default class Header extends Component {
                 <div className="container-fluid">
 
                     <button className="btnCloseOpenThemeSidenavMobile open-icon" onClick={(e) => this.openThemeSidebar(e)}><HiOutlineMenuAlt1 /></button>
-                    <NavLink className="" to={"/"}>
+                    <NavLink className="" to={"/dashboard"}>
                         <img src={Logo} className="app-logo header" alt="Free Sénégal" />
                     </NavLink>
                     <div id="themeBackdrop" onClick={(e) => this.closeThemeSidebar(e)}></div>

@@ -23,7 +23,7 @@ class App extends Component {
                 <Provider store={store}>
                     <div>
                         <Switch >
-                            <Route exact path="/" component={AuthLogin} />
+                            <Route exact path="/" component={isLogInExpired || isLogInExpired === undefined ? AuthLogin : Dashboard} />
                             {!isLogInExpired ? <Route exact path="/paiement/:id" component={PaymentView} /> : <Redirect to={`/`} />}
                             <Route path="/dashboard">
                                 {isLogInExpired || isLogInExpired === undefined ? <Redirect to={`/?next=${'/dashboard'}`} /> : <Dashboard />}
