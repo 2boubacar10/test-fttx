@@ -52,7 +52,7 @@ class NewPrepaymentSubscription extends Component {
 
         if (this.props.onValidatePrepaiedSubscriptionFields()) {
             this.setState({ savingSubscriptionProgress: true })
-
+            console.log("props", this.props.subscription)
             var api = this.state.api;
             const url = api + 'subscriptions';
             var config = this.state.requestConfig;
@@ -69,7 +69,7 @@ class NewPrepaymentSubscription extends Component {
             data.append('contract_photo', this.props.subscription.contract_photo)
             data.append('identity_type', this.props.subscription.identity_type)
             data.append('identity_photo_recto', this.props.subscription.identity_photo_recto)
-            data.append('identity_photo_', this.props.subscription.identity_photo_)
+            data.append('identity_photo_verso', this.props.subscription.identity_photo_verso)
             data.append('payment_method', this.props.subscription.payment_method)
             data.append('user_id', this.state.userID)
             data.append('profile_type', "particulier")
