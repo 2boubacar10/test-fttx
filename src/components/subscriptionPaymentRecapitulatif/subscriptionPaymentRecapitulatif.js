@@ -14,6 +14,13 @@ export default class SubscriptionPaymentRecapitulatif extends Component {
                         <td>Identifiant</td>
                         <td className='text-right fw-600'>{this.props.subscription.offer.number}</td>
                     </tr>
+                    {this.props.paymentData.customer_number ?
+                        <tr>
+                            <td>Numéro du client</td>
+                            <td className='text-right fw-600'>{this.props.paymentData.customer_number.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}</td>
+                        </tr>
+                        : null
+                    }
                     <tr>
                         <td>Redevance mensuel</td>
                         <td className='text-right fw-600'>{Intl.NumberFormat('fr-FR').format(parseInt(this.props.subscription.offer.monthly_payment))}{' '}FCFA</td>

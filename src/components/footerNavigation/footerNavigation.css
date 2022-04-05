@@ -11,20 +11,23 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 5px;
+    padding: 0 5px; 
+    text-decoration: none !important;
 }
 
 .component-footer-navigation .nav-button.active {
     transition: .2s ease-in-out;
 }
 
-.component-footer-navigation .nav-button.active svg {
+.component-footer-navigation .nav-button.active svg, .component-footer-navigation .nav-button:hover svg {
     color: #cc0000d5;
+    transition: .2s ease-in-out;
 }
 
-.component-footer-navigation .nav-button.active span {
+.component-footer-navigation .nav-button.active span, .component-footer-navigation .nav-button:hover span {
     color: #CC0000;
-    font-weight: 600;
+    font-weight: 600; 
+    transition: .2s ease-in-out;
 }
 
 .component-footer-navigation .nav-button svg {

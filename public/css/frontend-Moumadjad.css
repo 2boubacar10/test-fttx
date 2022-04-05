@@ -285,6 +285,7 @@ body {
 
 .table-recapitulatif td {
     padding: 5px 10px 5px 0 !important;
+    font-weight: 400;
 }
 
 .table-recapitulatif .value {
