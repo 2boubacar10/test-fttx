@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import './prepaidSubscriptionList.css';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
+// import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
+const { SearchBar } = Search;
 
 const columns = [
     {
@@ -52,20 +55,63 @@ class PrepaidSubscriptionList extends Component {
     }
 
     noDataMessage() {
-        return "Il n'y a pas des souscriptions prépaiement disponible!";
+        return "Il n'y a pas de souscription prépaiement disponible!";
     }
 
     render() {
+        const options = {
+            custom: true,
+            paginationSize: 4,
+            pageStartIndex: 1,
+            firstPageText: 'Première',
+            prePageText: 'Retour',
+            nextPageText: 'Suivant',
+            lastPageText: 'Dernier',
+            nextPageTitle: 'Première page',
+            prePageTitle: 'Page Precèdente',
+            firstPageTitle: 'Page suivante',
+            lastPageTitle: 'Dernière page',
+            showTotal: true,
+            totalSize: this.props.particularSubscriptions.length
+        };
+
+        const contentTable = ({ paginationProps, paginationTableProps }) => (
+            <div>
+                <PaginationListStandalone {...paginationProps} />
+                <ToolkitProvider
+                    keyField="id"
+                    columns={columns}
+                    data={this.props.particularSubscriptions}
+                    search
+                    bordered={false}
+                >
+                    {
+                        toolkitprops => (
+                            <div>
+                                <SearchBar
+                                    {...toolkitprops.searchProps}
+                                    placeholder={"Rechercher ..."}
+                                    className={"mb-3 w-auto"}
+                                />
+                                <BootstrapTable
+                                    striped
+                                    hover
+                                    {...toolkitprops.baseProps}
+                                    {...paginationTableProps}
+                                />
+                            </div>
+                        )
+                    }
+                </ToolkitProvider>
+                <PaginationListStandalone {...paginationProps} />
+            </div>
+        );
+
         return <div className="component-prepaid-subscription-list">
             <div className="col bootstrap-table-custom">
-                <BootstrapTable
-                    keyField='id'
-                    columns={columns}
-                    data={this.props.particularSubscriptions || []}
-                    bordered={false}
-                    pagination={paginationFactory()}
-                    noDataIndication={this.noDataMessage}
-                />
+                <PaginationProvider pagination={paginationFactory(options)}>
+                    {contentTable}
+                </PaginationProvider>
             </div>
         </div>;
     }

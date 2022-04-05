@@ -27,7 +27,7 @@ class ListOfSubscriptionRequests extends Component {
     componentDidMount() {
         var config = this.state.requestConfig;
         var userID = this.state.userID;
-        
+
         this.setState({ fetchingSubscriptionProgress: true })
 
         if (userID && config) {
@@ -36,12 +36,12 @@ class ListOfSubscriptionRequests extends Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(prevProps) {
+    componentWillReceiveProps(prevProps) {
         if (prevProps.particularSubscriptions) {
             this.setState({ particularSubscriptions: prevProps.particularSubscriptions, fetchingSubscriptionProgress: false })
         }
         if (prevProps.professionnalSubscriptions) {
-            this.setState({ professionnalSubscriptions: prevProps.professionnalSubscriptions, fetchingSubscriptionProgress: false  })
+            this.setState({ professionnalSubscriptions: prevProps.professionnalSubscriptions, fetchingSubscriptionProgress: false })
         }
     }
 
@@ -62,7 +62,7 @@ class ListOfSubscriptionRequests extends Component {
                         </nav>
                             <div className="tab-content pt-5" id="nav-tabContent">
                                 <div className="tab-pane fade show active" id="nav-particulier" role="tabpanel" aria-labelledby="nav-particulier-tab">
-                                    <NavLink className={"link-theme-with-icon mb-3 trans-0-2"} to={'/souscription'}><IoAddOutline />Créer une souscription</NavLink>
+                                    {/* <NavLink className={"link-theme-with-icon mb-3 trans-0-2"} to={'/souscription'}><IoAddOutline />Créer une souscription</NavLink> */}
                                     <PrepaidSubscriptionList
                                         particularSubscriptions={this.state.particularSubscriptions}
                                     />
@@ -79,7 +79,7 @@ class ListOfSubscriptionRequests extends Component {
                 <FooterNavigation />
             </div>;
         }
-        }
+    }
 }
 
 const mapDispatchToProps = dispatch => {

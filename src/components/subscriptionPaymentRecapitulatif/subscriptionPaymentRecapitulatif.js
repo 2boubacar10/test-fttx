@@ -12,12 +12,12 @@ export default class SubscriptionPaymentRecapitulatif extends Component {
                 <tbody>
                     <tr>
                         <td>Identifiant</td>
-                        <td className='text-right fw-600'>{this.props.subscription.offer.number}</td>
+                        <td className='text-right fw-600'>{this.props.subscription.number}</td>
                     </tr>
                     {this.props.paymentData.customer_number ?
                         <tr>
                             <td>Numéro du client</td>
-                            <td className='text-right fw-600'>{this.props.paymentData.customer_number.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}</td>
+                            <td className='text-right fw-600'>+{this.props.paymentData.customer_number.replace(/(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}</td>
                         </tr>
                         : null
                     }

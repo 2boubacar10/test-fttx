@@ -107,6 +107,7 @@ export default class SubscriptionPaymentFields extends Component {
                     <PhoneInput
                         country={'sn'}
                         onlyCountries={['sn']}
+                        disableDropdown={true}
                         regions={['africa']}
                         countryCodeEditable={false}
                         defaultMask={'.. ... .. ..'}
