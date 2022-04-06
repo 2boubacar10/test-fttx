@@ -148,12 +148,12 @@ class CreateSubscriptionRequest extends Component {
         this.setState({ subscription: subscription, dialCode: data })
     }
 
-    closeConformation(e) {
-        this.setState({ showConfirmation: false });
-        setTimeout(() => {
-            window.location = '/liste-des-souscriptions'
-        }, 200);
-    }
+    // closeConformation(e) {
+    //     this.setState({ showConfirmation: false });
+    //     setTimeout(() => {
+    //         window.location = '/liste-des-souscriptions'
+    //     }, 200);
+    // }
 
     openConfirmation(subscription) {
         this.setState({ newSubscription: subscription });
@@ -505,19 +505,22 @@ class CreateSubscriptionRequest extends Component {
                                     <p className="title-confirmation-modal mb-3">
                                         {this.state.aPostpaiedHasBeenSubscribed ? "La demande de souscription postpayée a bien été effectué." : "La demande de souscription prépayée a bien été effectué."}
                                         <br />
-                                        {this.state.newSubscription.payment_method === "Espèce" && "Veuillez à present passer au paiement."}
+                                        {/* {this.state.newSubscription.payment_method === "Espèce" && "Veuillez à present passer au paiement."} */}
+                                        Veuillez à present passer au paiement.
                                     </p>
                                 </div>
                                 <Modal.Footer className="text-center">
                                     <div className="row px-5">
                                         <div className="col-12 mb-3 d-flex justify-content-center">
-                                            {this.state.newSubscription.payment_method === "Espèce" ?
+                                            <NavLink className={"btn-theme-step trans-0-2"} to={`/paiement/${this.state.newSubscription.id}`}>Continuer</NavLink>
+
+                                            {/* {this.state.newSubscription.payment_method === "Espèce" ?
                                                 <NavLink className={"btn-theme-step trans-0-2"} to={`/paiement/${this.state.newSubscription.id}`}>Continuer</NavLink>
                                                 :
                                                 <button type='button' onClick={this.closeConformation} className="btn-theme-step trans-0-2">
                                                     Fermer
                                                 </button>
-                                            }
+                                            } */}
                                         </div>
                                     </div>
                                 </Modal.Footer>

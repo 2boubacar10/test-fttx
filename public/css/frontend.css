@@ -534,3 +534,32 @@ body {
 #search-bar-0-label{
     display: none;
 }
+
+.theme-custom .rs-modal-title{
+    color: #cc0000 !important;
+    margin-top: 5px;
+} 
+.rsuite-custom .rs-modal {
+    margin: 36px auto 30px !important;
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.02);
+    --bs-table-active-color: #212529;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #212529;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+.image-thumbnail{
+    width: 60px;
+    height: 60px;
+}

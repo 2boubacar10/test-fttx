@@ -101,30 +101,32 @@ export default class SubscriptionPaymentFields extends Component {
                     </tbody>
                 </table>
             </div>
-            <div className="col-sm-6 mb-4">
-                <div className="form-group">
-                    <label htmlFor="phone_number" className="form-label">Téléphone</label>
-                    <PhoneInput
-                        country={'sn'}
-                        onlyCountries={['sn']}
-                        disableDropdown={true}
-                        regions={['africa']}
-                        countryCodeEditable={false}
-                        defaultMask={'.. ... .. ..'}
-                        placeholder={"Numéro de téléphone Free Money"}
-                        value={this.props.paymentData.customer_number}
-                        onChange={this.handleChangeCustomerPhone}
-                        inputProps={{
-                            name: 'phone_number',
-                            required: true,
-                        }}
-                        className={`phone-input-custom ${this.props.is_empty_customer_number || this.props.no_correct_format_customer_number ? 'is-invalid-custom' : ""}`}
-                    />
-                    {this.props.is_empty_customer_number && <span className='badge bg-danger'>Veuillez renseigner le numéro Free Money du client!</span>}
-                    {this.props.no_correct_format_customer_number && <span className='badge bg-danger'>Le numéro renseigné n'est pas au bon format!</span>}
+            {this.props.subscription.payment_method === "Free Money" &&
+                <div className="col-sm-6 mb-4">
+                    <div className="form-group">
+                        <label htmlFor="phone_number" className="form-label">Téléphone</label>
+                        <PhoneInput
+                            country={'sn'}
+                            onlyCountries={['sn']}
+                            disableDropdown={true}
+                            regions={['africa']}
+                            countryCodeEditable={false}
+                            defaultMask={'.. ... .. ..'}
+                            placeholder={"Numéro de téléphone Free Money"}
+                            value={this.props.paymentData.customer_number}
+                            onChange={this.handleChangeCustomerPhone}
+                            inputProps={{
+                                name: 'phone_number',
+                                required: true,
+                            }}
+                            className={`phone-input-custom ${this.props.is_empty_customer_number || this.props.no_correct_format_customer_number ? 'is-invalid-custom' : ""}`}
+                        />
+                        {this.props.is_empty_customer_number && <span className='badge bg-danger'>Veuillez renseigner le numéro Free Money du client!</span>}
+                        {this.props.no_correct_format_customer_number && <span className='badge bg-danger'>Le numéro renseigné n'est pas au bon format!</span>}
 
+                    </div>
                 </div>
-            </div>
+            }
         </div>;
     }
 }

@@ -1,0 +1,11 @@
+.component-customer-subscription-details .souscriptionId{
+    text-decoration: underline; 
+    cursor: pointer;
+}
+
+.table-customer-subscription-details  td {
+    /* padding: 5px 10px 5px 0 !important; */
+    vertical-align: middle;
+    font-weight: 400;
+    border: 1px solid transparent;
+}
