@@ -148,12 +148,12 @@ class CreateSubscriptionRequest extends Component {
         this.setState({ subscription: subscription, dialCode: data })
     }
 
-    // closeConformation(e) {
-    //     this.setState({ showConfirmation: false });
-    //     setTimeout(() => {
-    //         window.location = '/liste-des-souscriptions'
-    //     }, 200);
-    // }
+    closeConformation(e) {
+        this.setState({ showConfirmation: false });
+        setTimeout(() => {
+            window.location = '/liste-des-souscriptions'
+        }, 200);
+    }
 
     openConfirmation(subscription) {
         this.setState({ newSubscription: subscription });
