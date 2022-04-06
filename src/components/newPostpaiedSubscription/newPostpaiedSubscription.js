@@ -74,7 +74,7 @@ export default class NewPostpaiedSubscription extends Component {
             data.append('payment_method', this.props.subscription.payment_method)
             data.append('user_id', this.state.userID)
             data.append('profile_type', "professionnel")
-            data.append('activity_sector', "XXXXXXX")
+            // data.append('activity_sector', "XXXXXXX")
 
             axios.post(url, data, config)
                 .then(response => {

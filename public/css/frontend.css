@@ -149,16 +149,16 @@ body {
     cursor: pointer;
 }
 
-.component-create-subscription-request .rs-steps-item-tail {
+.theme-custom .rs-steps-item-tail {
     display: none;
 }
 
-.component-create-subscription-request .rs-steps-vertical .rs-steps-item {
+.theme-custom .rs-steps-vertical .rs-steps-item {
     padding-bottom: 0;
     padding-left: 22px;
 }
 
-.component-create-subscription-request .rs-steps-item-title {
+.theme-custom .rs-steps-item-title {
     font-size: 14px;
     min-height: 16px;
     padding-right: 0;
@@ -167,7 +167,7 @@ body {
     color: #3C3A39;
 }
 
-.component-create-subscription-request .rs-steps-item-icon-wrapper {
+.theme-custom .rs-steps-item-icon-wrapper {
     width: auto;
     height: 100%;
     line-height: initial;
@@ -180,30 +180,30 @@ body {
     border-radius: 0;
 }
 
-.component-create-subscription-request .rs-steps-item-icon-wrapper .rs-steps-item-icon {
+.theme-custom .rs-steps-item-icon-wrapper .rs-steps-item-icon {
     color: #3C3A39 !important;
 
 }
 
-.component-create-subscription-request .rs-steps-item-icon-wrapper .rs-steps-item-icon.rs-steps-item-icon-finish {
+.theme-custom .rs-steps-item-icon-wrapper .rs-steps-item-icon.rs-steps-item-icon-finish {
     color: #21A374 !important;
 
 }
 
-.component-create-subscription-request .rs-steps-item.rs-steps-item-status-finish .rs-steps-item-title {
+.theme-custom .rs-steps-item.rs-steps-item-status-finish .rs-steps-item-title {
     color: #000000;
     font-weight: 600;
 }
 
-.component-create-subscription-request .rs-steps.rs-steps-vertical {
+.theme-custom .rs-steps.rs-steps-vertical {
     margin-bottom: 2rem;
 }
 
-.component-create-subscription-request .rs-steps-vertical .rs-steps-item:not(:first-child) {
+.theme-custom .rs-steps-vertical .rs-steps-item:not(:first-child) {
     margin-top: 0;
 }
 
-.component-create-subscription-request label {
+.theme-custom label {
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -215,7 +215,7 @@ body {
     margin-bottom: 5px;
 }
 
-.component-create-subscription-request .form-control {
+.theme-custom .form-control {
     background-color: #FDFDFF;
     border: 1px solid #E4E6FC;
     height: 35px;
@@ -226,48 +226,48 @@ body {
     width: 100%;
 }
 
-.component-create-subscription-request .form-control {
+.theme-custom .form-control {
     border: 1px solid #E4E6FC !important;
 }
 
-.component-create-subscription-request .form-control:focus, .component-create-subscription-request .rs-picker-toggle.rs-btn.rs-btn-default:focus {
+.theme-custom .form-control:focus, .theme-custom .rs-picker-toggle.rs-btn.rs-btn-default:focus {
     border: 1px solid #b6b8ba !important;
 }
 
-.component-create-subscription-request .rs-picker-toggle.rs-btn.rs-btn-default,
-.component-create-subscription-request .rs-picker-toggle.rs-btn.rs-btn-default:focus,
-.component-create-subscription-request .rs-picker-toggle.rs-btn.rs-btn-default:focus-visible {
+.theme-custom .rs-picker-toggle.rs-btn.rs-btn-default,
+.theme-custom .rs-picker-toggle.rs-btn.rs-btn-default:focus,
+.theme-custom .rs-picker-toggle.rs-btn.rs-btn-default:focus-visible {
     outline: 3px solid transparent !important;
     box-shadow: none !important;
 }
 
-.component-create-subscription-request .form-group {
+.theme-custom .form-group {
     /* min-height: 75px; */
     /* margin-bottom: 1.2rem; */
 }
 
-.component-create-subscription-request .rs-radio-inline {
+.theme-custom .rs-radio-inline {
     margin-left: 0;
     margin-right: 10px;
 }
 
-.component-create-subscription-request .rs-radio.rs-radio-checked .rs-radio-inner:before {
+.theme-custom .rs-radio.rs-radio-checked .rs-radio-inner:before {
     border-color: #cc0000;
     background-color: #cc0000;
 }
 
-.component-create-subscription-request .rs-radio-wrapper>input:focus {
+.theme-custom .rs-radio-wrapper>input:focus {
     outline: none !important;
     box-shadow: none !important;
 }
 
-.component-create-subscription-request .rs-picker-toggle.rs-btn.rs-btn-default, .rsuite-custom .rs-picker-search-bar-input {
+.theme-custom .rs-picker-toggle.rs-btn.rs-btn-default, .rsuite-custom .rs-picker-search-bar-input {
     border-radius: 3px !important;
     background: #FDFDFF !important;
     border: 1px solid #E4E6FC !important;
 }
 
-.component-create-subscription-request .react-tel-input .flag-dropdown {
+.theme-custom .react-tel-input .flag-dropdown {
     /* display: none; */
     background-color: transparent;
     border-color: inherit;
@@ -275,7 +275,7 @@ body {
 
 }
 
-.component-create-subscription-request .rs-picker-input {
+.theme-custom .rs-picker-input {
     border: 1px solid transparent;
 }
 
@@ -530,4 +530,36 @@ body {
 
 .random-numpad-container {
     margin: -5px;
+}
+#search-bar-0-label{
+    display: none;
+}
+
+.theme-custom .rs-modal-title{
+    color: #cc0000 !important;
+    margin-top: 5px;
+} 
+.rsuite-custom .rs-modal {
+    margin: 36px auto 30px !important;
+}
+
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: #212529;
+    --bs-table-striped-bg: rgba(0, 0, 0, 0.02);
+    --bs-table-active-color: #212529;
+    --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+    --bs-table-hover-color: #212529;
+    --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+.image-thumbnail{
+    width: 60px;
+    height: 60px;
 }
