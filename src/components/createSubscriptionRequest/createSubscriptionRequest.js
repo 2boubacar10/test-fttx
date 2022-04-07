@@ -9,9 +9,7 @@ import { fetchAllAreas } from '../../redux/Area/area-actions';
 import { fetchBuildingByArea } from '../../redux/Building/building-actions';
 import { fetchOffersByOfferType } from '../../redux/Offer/offer-actions';
 import { fetchUserConnected } from '../../redux/User/user-actions';
-import { Modal } from 'rsuite';
-import IconConfirm from '../../images/icons/icon-check.png';
-import { NavLink } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const paymentMethod = [
     { name: "Free Money" },
@@ -72,15 +70,12 @@ class CreateSubscriptionRequest extends Component {
             is_empty_commercial_register_number: false,
             dialCode: {},
             buildings: [],
-            showConfirmation: false,
             aPostpaiedHasBeenSubscribed: false,
             newSubscription: {}
         };
         this.handleChangeSelectArea = this.handleChangeSelectArea.bind(this);
         this.handleChangeSubscription = this.handleChangeSubscription.bind(this);
         this.handleChangeSubscriptionFile = this.handleChangeSubscriptionFile.bind(this);
-        this.closeConformation = this.closeConformation.bind(this);
-        this.openConfirmation = this.openConfirmation.bind(this);
     }
 
     componentDidMount() {
@@ -148,21 +143,34 @@ class CreateSubscriptionRequest extends Component {
         this.setState({ subscription: subscription, dialCode: data })
     }
 
-    closeConformation(e) {
-        this.setState({ showConfirmation: false });
-        setTimeout(() => {
-            window.location = '/liste-des-souscriptions'
-        }, 200);
-    }
-
-    openConfirmation(subscription) {
-        this.setState({ newSubscription: subscription });
+    openConfirmation = (subscription) => {
         if (subscription.profile_type === "professionnel") {
-            this.setState({ aPostpaiedHasBeenSubscribed: true })
+            Swal.fire({
+                icon: 'success',
+                title: 'Souscription enregistrée',
+                html:
+                    `La demande de souscription postpayée a bien été effectué <br/><br/>` +
+                    'Veuillez à present passer au paiement.',
+                confirmButtonText: 'Continuer',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/paiement/" + subscription.id
+                }
+            })
+        } else {
+            Swal.fire({
+                icon: 'success',
+                title: 'Souscription enregistrée',
+                html:
+                    `La demande de souscription prépayée a bien été effectué <br/><br/>` +
+                    'Veuillez à present passer au paiement.',
+                confirmButtonText: 'Continuer',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "/paiement/" + subscription.id
+                }
+            })
         }
-        setTimeout(() => {
-            this.setState({ showConfirmation: true });
-        }, 200);
     }
 
 
@@ -415,13 +423,11 @@ class CreateSubscriptionRequest extends Component {
     }
 
     render() {
-        // console.log('first off', this.props.offerByOfferType)
         return <div className="component-create-subscription-request">
             <Header />
             <div className="content-section">
                 <div className="container">
                     <h5 className='theme-title'>Nouvelle souscription</h5>
-
                     <nav>
                         <div className="theme-tabs nav nav-tabs  justify-content-center mt-4" id="nav-tab" role="tablist">
                             <button onClick={(e) => this.navigationButtonSubscriptionButton(e, 'particulier')} className="nav-link active" id="nav-particulier-tab" data-bs-toggle="tab" data-bs-target="#nav-particulier" type="button" role="tab" aria-controls="nav-particulier" aria-selected="true">Particulier</button>
@@ -491,41 +497,6 @@ class CreateSubscriptionRequest extends Component {
 
                             />
                         </div>
-                    </div>
-
-                    {/* Modal confirmation de souscription  */}
-                    <div className="modal-container message-confirmation">
-                        <Modal size="xs" open={this.state.showConfirmation} backdrop={true} onClose={this.closeConformation} className="rsuite-content-modal-custom">
-                            <form>
-                                <Modal.Header>
-                                    <Modal.Title></Modal.Title>
-                                </Modal.Header>
-                                <div className="mt-5 mb-3 flex-col itm-center">
-                                    <img src={IconConfirm} className="icon-confirmation-modal mb-5" alt="icon-confirmation" />
-                                    <p className="title-confirmation-modal mb-3">
-                                        {this.state.aPostpaiedHasBeenSubscribed ? "La demande de souscription postpayée a bien été effectué." : "La demande de souscription prépayée a bien été effectué."}
-                                        <br />
-                                        {/* {this.state.newSubscription.payment_method === "Espèce" && "Veuillez à present passer au paiement."} */}
-                                        Veuillez à present passer au paiement.
-                                    </p>
-                                </div>
-                                <Modal.Footer className="text-center">
-                                    <div className="row px-5">
-                                        <div className="col-12 mb-3 d-flex justify-content-center">
-                                            <NavLink className={"btn-theme-step trans-0-2"} to={`/paiement/${this.state.newSubscription.id}`}>Continuer</NavLink>
-
-                                            {/* {this.state.newSubscription.payment_method === "Espèce" ?
-                                                <NavLink className={"btn-theme-step trans-0-2"} to={`/paiement/${this.state.newSubscription.id}`}>Continuer</NavLink>
-                                                :
-                                                <button type='button' onClick={this.closeConformation} className="btn-theme-step trans-0-2">
-                                                    Fermer
-                                                </button>
-                                            } */}
-                                        </div>
-                                    </div>
-                                </Modal.Footer>
-                            </form>
-                        </Modal>
                     </div>
                 </div>
             </div>

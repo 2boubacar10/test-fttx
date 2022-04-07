@@ -8,17 +8,21 @@ import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
 
 const { SearchBar } = Search;
 
-function rankFormatter(cell, row) {
+function subscriptionDetails(cell, row) {
     return (
         <CustomerSubscriptionDetails subscription={row} />
     );
+}
+
+function phone(cell, row) {
+    return "+" + cell;
 }
 
 const columns = [
     {
         dataField: 'number',
         text: 'Identifiant',
-        formatter: rankFormatter,
+        formatter: subscriptionDetails,
         headerStyle: (colum, colIndex) => {
             return { width: 130 };
         }
@@ -41,6 +45,7 @@ const columns = [
     {
         dataField: 'phone_number',
         text: 'Téléphone',
+        formatter: phone,
         headerStyle: (colum, colIndex) => {
             return { width: 135 };
         }
@@ -63,7 +68,7 @@ class PrepaidSubscriptionList extends Component {
     }
 
     noDataMessage() {
-        return "Il n'y a pas de souscription prépaiement disponible!";
+        return "Il n'y a pas de souscription prépaiement trouvé!";
     }
 
     render() {
@@ -92,6 +97,7 @@ class PrepaidSubscriptionList extends Component {
                     columns={columns}
                     data={this.props.particularSubscriptions}
                     search
+                    noDataMessage={this.noDataMessage}
                 // bordered={false}
                 >
                     {
