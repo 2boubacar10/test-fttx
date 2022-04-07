@@ -285,6 +285,7 @@ body {
 
 .table-recapitulatif td {
     padding: 5px 10px 5px 0 !important;
+    font-weight: 400;
 }
 
 .table-recapitulatif .value {
@@ -562,4 +563,43 @@ body {
 .image-thumbnail{
     width: 60px;
     height: 60px;
+}
+
+.theme-custom .swal2-title{
+    line-height: 1;
+    font-size: 22px;
+}
+.theme-custom .swal2-html-container{
+    font-size: 16px !important;
+}
+
+.theme-custom .swal2-confirm.swal2-styled{
+    font-size: 14px;
+    background-color: #cc0000;
+} 
+
+.theme-custom .swal2-popup{
+    padding: 0px 0 1.7em;
+}
+
+.rsuite-custom .rs-picker.rs-picker-focused, .rsuite-custom .rs-picker:not(.rs-picker-disabled):hover {
+    border-color: transparent;
+    box-shadow: none;
+}
+.theme-custom .swal2-styled.swal2-confirm:focus, .theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-link:focus {
+    box-shadow: 0 0 0 3px rgb(204 0 0 / 50%);
+}
+
+.theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-link {
+    color: inherit; 
+    text-decoration: none;
+
+} 
+
+.theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-item{
+    color: #3C3A39;
+}
+
+.theme-custom .pagination.react-bootstrap-table-page-btns-ul .active.page-item{
+    color: #ffffff;
 }

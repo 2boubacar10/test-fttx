@@ -8,17 +8,21 @@ import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
 
 const { SearchBar } = Search;
 
-function rankFormatter(cell, row) {
+function subscriptionDetails(cell, row) {
     return (
         <CustomerSubscriptionDetails subscription={row} />
     );
+}
+
+function phone(cell, row) {
+    return "+" + cell;
 }
 
 const columns = [
     {
         dataField: 'number',
         text: 'Identifiant',
-        formatter: rankFormatter,
+        formatter: subscriptionDetails,
         headerStyle: (column, colIndex) => {
             return { width: 130 };
         }
@@ -40,6 +44,7 @@ const columns = [
     {
         dataField: 'phone_number',
         text: 'Téléphone',
+        formatter: phone,
         headerStyle: (column, colIndex) => {
             return { width: 135 };
         }
@@ -59,7 +64,7 @@ export default class PostpaiedSubscriptionList extends Component {
     }
 
     noDataMessage() {
-        return "Il n'y a pas de souscription post paiement disponible!";
+        return "Il n'y a pas de souscription post paiement trouvé!";
     }
 
     render() {
@@ -87,6 +92,7 @@ export default class PostpaiedSubscriptionList extends Component {
                     columns={columns}
                     data={this.props.professionnalSubscriptions}
                     search
+                    noDataMessage={this.noDataMessage}
                 // bordered={false}
                 >
                     {

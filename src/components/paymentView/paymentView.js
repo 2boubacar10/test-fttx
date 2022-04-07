@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './paymentView.css';
-import { Steps } from 'rsuite';
+import { Loader } from 'rsuite';
 import SubscriptionPaymentFields from '../subscriptionPaymentFields/index';
 import SubscriptionPaymentRecapitulatif from '../subscriptionPaymentRecapitulatif/index';
 import SubscriptionPaymentKeypad from '../subscriptionPaymentKeypad/index';
@@ -9,8 +9,7 @@ import { fetchSubscriptionById } from '../../redux/Subscription/subscription-act
 import LoadingPage from '../loadingPage/index';
 import api from '../../config/global-vars';
 import axios from 'axios';
-import { Modal } from 'rsuite';
-import IconConfirm from '../../images/icons/icon-check.png';
+import Swal from 'sweetalert2';
 
 class PaymentView extends Component {
     constructor(props) {
@@ -22,7 +21,8 @@ class PaymentView extends Component {
                 headers: { Authorization: `Bearer ${window.localStorage.getItem('userToken')}` }
             },
             step: 0,
-            subscriptionPaymentInProcess: false,
+            subscriptionPaymentByFreelancerInProcess: false,
+            subscriptionPaymentByCustomerInProcess: false,
             subscriptionID: this.props.match.params.id,
             secretCodeValue: "",
             subscriptionFetchingProgress: false,
@@ -31,13 +31,10 @@ class PaymentView extends Component {
             installationCost: 0,
             totalMount: 0,
             paymentData: { customer_number: "" },
-            showConfirmation: false,
             is_empty_customer_number: false,
             no_correct_format_customer_number: false
 
         };
-        this.closeConformation = this.closeConformation.bind(this);
-        this.openConfirmation = this.openConfirmation.bind(this);
     }
 
     componentWillMount() {
@@ -147,10 +144,21 @@ class PaymentView extends Component {
         return isValidForm
     }
 
+    onCustomerInitSubscriptionPayment = (e) => {
+        e.preventDefault();
 
-    onSubmitSubscriptionPayment() {
         if (this.onValidateCustomerNumber()) {
-            this.setState({ subscriptionPaymentInProcess: true })
+            this.setState({ subscriptionPaymentByCustomerInProcess: true })
+            setTimeout(() => {
+                this.openPaymentFailure()
+                this.setState({ subscriptionPaymentByCustomerInProcess: false })
+            }, 1000);
+        }
+    }
+
+    onFreelancerInitSubscriptionPayment() {
+        if (this.onValidateCustomerNumber()) {
+            this.setState({ subscriptionPaymentByFreelancerInProcess: true })
 
             var api = this.state.api;
             var config = this.state.requestConfig;
@@ -171,8 +179,8 @@ class PaymentView extends Component {
             //     })
 
             setTimeout(() => {
-                this.setState({ subscriptionPaymentInProcess: false })
-                this.openConfirmation()
+                this.setState({ subscriptionPaymentByFreelancerInProcess: false })
+                this.openPaymentConfirmation()
             }, 3000);
         }
 
@@ -182,51 +190,66 @@ class PaymentView extends Component {
         this.setState({ secretCodeValue: secretCode })
         if (secretCode.length === 4) {
             setTimeout(() => {
-                this.onSubmitSubscriptionPayment()
+                this.onFreelancerInitSubscriptionPayment()
             }, 200);
         }
     }
 
-    closeConformation(e) {
-        this.setState({ showConfirmation: false });
-        setTimeout(() => {
-            window.location = '/liste-des-souscriptions'
-        }, 200);
+    openPaymentConfirmation = () => {
+        Swal.fire({
+            icon: 'success',
+            title: 'Paiement effectué!',
+            html:
+                'Le paiement a bien été encaissé. <br/>',
+            confirmButtonText: 'Fermer',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/liste-des-souscriptions"
+            }
+        })
     }
 
-    openConfirmation() {
-        setTimeout(() => {
-            this.setState({ showConfirmation: true });
-        }, 200);
+    openPaymentFailure = () => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Paiement echoué!',
+            html:
+                'Le paiement a échoué. Merci de réessayé. <br/>',
+            confirmButtonText: 'Réessayer',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.openPaymentConfirmation()
+            }
+        })
     }
 
     render() {
-        const { step } = this.state;
+        const { step, subscription, paymentData } = this.state;
 
-        if (this.state.subscriptionFetchingProgress || this.state.subscriptionPaymentInProcess) {
-            return <LoadingPage subscriptionPaymentInProcess={this.state.subscriptionPaymentInProcess} />
+        if (this.state.subscriptionFetchingProgress || this.state.subscriptionPaymentByFreelancerInProcess) {
+            return <LoadingPage subscriptionPaymentByFreelancerInProcess={this.state.subscriptionPaymentByFreelancerInProcess} />
         } else {
-            console.log('first render', this.state.paymentData)
+            console.log('first render', paymentData)
             return <div className="component-create-subscription-request component-payment-view">
                 <div className="py-5">
                     <div className="container">
                         <h5 className='theme-title mb-5 text-left'>Paiement</h5>
                         <div>
-                            <Steps current={step} vertical>
+                            {/* <Steps current={step} vertical>
                                 <Steps.Item title={`Informations du paiement`} />
                                 <Steps.Item title="Récapitulatif" />
                                 <Steps.Item title="Paiement" />
-                            </Steps>
+                            </Steps> */}
 
                             <div>
                                 {step === 0 ?
                                     <SubscriptionPaymentFields
-                                        subscription={this.state.subscription}
+                                        subscription={subscription}
                                         installationCostStatus={this.state.installationCostStatus}
                                         handleInstallationCostStatus={this.handleInstallationCostStatus}
                                         totalMount={this.state.totalMount}
                                         installationCost={this.state.installationCost}
-                                        paymentData={this.state.paymentData}
+                                        paymentData={paymentData}
                                         onSetCustomerPhone={this.handleCustomerPhone}
                                         is_empty_customer_number={this.state.is_empty_customer_number}
                                         no_correct_format_customer_number={this.state.no_correct_format_customer_number}
@@ -235,10 +258,10 @@ class PaymentView extends Component {
                                     :
                                     step === 1 ?
                                         <SubscriptionPaymentRecapitulatif
-                                            subscription={this.state.subscription}
+                                            subscription={subscription}
                                             totalMount={this.state.totalMount}
                                             installationCost={this.state.installationCost}
-                                            paymentData={this.state.paymentData}
+                                            paymentData={paymentData}
                                         />
                                         :
                                         step === 2 &&
@@ -256,50 +279,34 @@ class PaymentView extends Component {
                                     Retour
                                 </span>
 
-                                <span className={step > 1 ? 'd-none' : 'ms-auto btn-theme-step trans-0-2'}
-                                    onClick={(e) => this.suivant(e)}
-                                >
-                                    Suivant
-                                </span>
+                                {subscription.payment_method === "Free Money" ?
+                                    step < 1 ?
+                                        <span className={step < 1 ? 'ms-auto btn-theme-step trans-0-2' : 'd-none'}
+                                            onClick={(e) => this.suivant(e)}
+                                        >
+                                            Suivant
+                                        </span>
+                                        :
+                                        this.state.subscriptionPaymentByCustomerInProcess ?
+                                            <button className=" ms-auto btn-theme-step in-progress-btn" disabled>
+                                                Paiement &nbsp; <Loader />
+                                            </button>
+                                            :
+                                            <button onClick={(e) => this.onCustomerInitSubscriptionPayment(e)} className="ms-auto btn-theme-step">Payer</button>
 
-                                {/* <div className={step <= 1 ? 'd-none' : 'ms-auto'}>
-                                {this.state.subscriptionPaymentInProcess ?
-                                    <button className=" ms-auto btn-theme-step in-progress-btn" disabled>
-                                        Paiement &nbsp; <Loader />
-                                    </button>
                                     :
-                                    <button className="ms-auto btn-theme-step" > Payer </button>
+                                    <span className={step < 2 ? 'ms-auto btn-theme-step trans-0-2' : 'd-none'}
+                                        onClick={(e) => this.suivant(e)}
+                                    >
+                                        Suivant
+                                    </span>
                                 }
-                            </div> */}
-                            </div>
-                        </div>
 
-                        {/* Modal confirmation de paiement  */}
-                        <div className="modal-container message-confirmation">
-                            <Modal size="xs" open={this.state.showConfirmation} backdrop={true} onClose={this.closeConformation} className="rsuite-content-modal-custom">
-                                <form>
-                                    <Modal.Header>
-                                        <Modal.Title></Modal.Title>
-                                    </Modal.Header>
-                                    <div className="mt-5 mb-3 flex-col itm-center">
-                                        <img src={IconConfirm} className="icon-confirmation-modal mb-5" alt="icon-confirmation" />
-                                        <p className="title-confirmation-modal mb-3">Le paiement a bien été encaissé!</p>
-                                    </div>
-                                    <Modal.Footer className="text-center">
-                                        <div className="row px-5">
-                                            <div className="col-12 mb-3 d-flex justify-content-center">
-                                                <button type='button' onClick={this.closeConformation} className="btn-theme-step trans-0-2">
-                                                    Fermer
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </Modal.Footer>
-                                </form>
-                            </Modal>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>;
+            </div >;
         }
     }
 }
