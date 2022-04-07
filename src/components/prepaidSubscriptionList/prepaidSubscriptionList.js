@@ -13,6 +13,7 @@ function rankFormatter(cell, row) {
         <CustomerSubscriptionDetails subscription={row} />
     );
 }
+
 const columns = [
     {
         dataField: 'number',
@@ -91,7 +92,7 @@ class PrepaidSubscriptionList extends Component {
                     columns={columns}
                     data={this.props.particularSubscriptions}
                     search
-                    bordered={false}
+                // bordered={false}
                 >
                     {
                         toolkitprops => (

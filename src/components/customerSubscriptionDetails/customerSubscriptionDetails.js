@@ -35,7 +35,8 @@ export default class CustomerSubscriptionDetails extends Component {
 							<Modal.Title>Détails de la souscription</Modal.Title>
 						</Modal.Header>
 						<Modal.Body>
-							<div>Statut de la demande: <span>{this.props.subscription.subscription_status.name}</span></div>
+							<div className='mt-4'>Statut de la demande:</div>
+							<span className='fw-700'>{this.props.subscription.subscription_status.name.replace(/_/g, " ")}</span>
 
 							<div className="mt-5 mb-3 table-responsive">
 								<table className="table table-striped table-customer-subscription-details">
@@ -80,12 +81,12 @@ export default class CustomerSubscriptionDetails extends Component {
 												<td className='text-capitalize td-value'>{this.props.subscription.commercial_register_number}</td>
 											</tr> : null
 										}
-										{/* {this.props.subscription.commercial_register_file ?
-										<tr>
-											<td className='fw-600'>Registre de commerce</td>
-											<td className='text-capitalize td-value'>{this.props.subscription.commercial_register_file_name}</td>
-										</tr> : null
-									} */}
+										{this.props.subscription.commercial_register_url ?
+											<tr>
+												<td className='fw-600'>Registre de commerce</td>
+												<td className='text-capitalize td-value'><span className="badge bg-success">Disponible</span></td>
+											</tr> : null
+										}
 										<tr>
 											<td className='fw-600'>Zone</td>
 											<td className='text-capitalize td-value'>{this.props.subscription.zone ? this.props.subscription.zone.ref : this.props.subscription.zone_id}</td>
@@ -131,7 +132,9 @@ export default class CustomerSubscriptionDetails extends Component {
 										{this.props.subscription.identity_photo_verso_url &&
 											<tr>
 												<td className='fw-600'>Pièce d'identité(verso)</td>
-												<span className={`badge ${this.props.subscription.identity_photo_verso_url ? "bg-success" : "bg-danger"}`}>{this.props.subscription.identity_photo_verso_url ? "Disponible" : "Non disponible"}</span>
+												<td>
+													<span className={`badge ${this.props.subscription.identity_photo_verso_url ? "bg-success" : "bg-danger"}`}>{this.props.subscription.identity_photo_verso_url ? "Disponible" : "Non disponible"}</span>
+												</td>
 												{/* <td className='text-capitalize td-value'>{this.props.subscription.identity_photo_verso_url}</td> */}
 											</tr>
 										}

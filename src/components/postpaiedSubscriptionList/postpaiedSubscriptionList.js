@@ -4,13 +4,21 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
 // import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
 
 const { SearchBar } = Search;
+
+function rankFormatter(cell, row) {
+    return (
+        <CustomerSubscriptionDetails subscription={row} />
+    );
+}
 
 const columns = [
     {
         dataField: 'number',
         text: 'Identifiant',
+        formatter: rankFormatter,
         headerStyle: (column, colIndex) => {
             return { width: 130 };
         }
@@ -79,7 +87,7 @@ export default class PostpaiedSubscriptionList extends Component {
                     columns={columns}
                     data={this.props.professionnalSubscriptions}
                     search
-                    bordered={false}
+                // bordered={false}
                 >
                     {
                         toolkitprops => (
