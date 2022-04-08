@@ -22,7 +22,7 @@ export const fetchParticularSubscriptionsByFreelancer = (userId, config) => {
 
         dispatch({
             type: actionTypes.FETCH_PARTICULAR_SUBSCRIPTION_BY_FREELANCER,
-            payload: data.data,
+            payload: data.data.reverse(),
         });
     }
 };
@@ -35,7 +35,7 @@ export const fetchProfessionnelSubscriptionsByFreelancer = (userId, config) => {
 
         dispatch({
             type: actionTypes.FETCH_PROFESSIONNAL_SUBSCRIPTION_BY_FREELANCER,
-            payload: data.data,
+            payload: data.data.reverse(),
         });
     }
 };

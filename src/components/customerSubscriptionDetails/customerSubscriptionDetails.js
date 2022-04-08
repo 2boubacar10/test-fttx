@@ -21,8 +21,6 @@ export default class CustomerSubscriptionDetails extends Component {
 	}
 
 	render() {
-		console.log('first', this.props.subscription)
-
 		return <div className="component-customer-subscription-details">
 			<span onClick={() => this.openSubscriptionDetails()} className='souscriptionId'>#{this.props.subscription.number}</span>
 

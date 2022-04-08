@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './newPostpaiedSubscription.css';
-import { Steps, Loader } from 'rsuite';
+import { Loader } from 'rsuite';
 import api from '../../config/global-vars';
 import axios from 'axios';
 import PostpaiedSubscriptionFields from '../postpaiedSubscriptionFields/postpaiedSubscriptionFields';
 import SubscriptionRecapitulatif from '../subscriptionRecapitulatif/subscriptionRecapitulatif';
-import { toastr } from 'react-redux-toastr';
 
 export default class NewPostpaiedSubscription extends Component {
     constructor(props) {
@@ -74,7 +73,6 @@ export default class NewPostpaiedSubscription extends Component {
             data.append('payment_method', this.props.subscription.payment_method)
             data.append('user_id', this.state.userID)
             data.append('profile_type', "professionnel")
-            // data.append('activity_sector', "XXXXXXX")
 
             axios.post(url, data, config)
                 .then(response => {
@@ -86,7 +84,7 @@ export default class NewPostpaiedSubscription extends Component {
                 .catch(error => {
                     this.setState({ postpaiedSubscriptionInProgress: false })
                     if (error) {
-                        toastr.error('Oups! Une erreur est survenue. Veuillez réessayer!');
+                        this.props.openSubscriptionFailed()
                     }
                 });
         }
@@ -97,11 +95,6 @@ export default class NewPostpaiedSubscription extends Component {
 
         return <div className="component-new-postpaied-subscription">
             <form onSubmit={(e) => this.onSavePostpaiedSubscription(e)}>
-                <Steps current={step} vertical>
-                    <Steps.Item title={`Informations de l'entreprise`} />
-                    <Steps.Item title="Récapitulatif" />
-                </Steps>
-
                 <div>
                     {step === 0 ?
                         (

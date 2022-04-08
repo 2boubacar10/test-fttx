@@ -17,7 +17,8 @@ export default class PrepaymentSubscriptionFields extends Component {
 
     render() {
         return <div className="component-prepayment-subscription-fields">
-            <div className="row">
+            <p className='title-step'>Informations du client</p>
+            <div className="row mt-3">
                 <div className="col-sm-12 mb-3">
                     <div className="form-group">
                         <label className="form-label">Civilité</label>

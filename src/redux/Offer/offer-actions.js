@@ -19,7 +19,7 @@ export const fetchOffersByOfferType = (offer_type, config) => {
         const url = api + 'profile_type/' + offer_type + '/offers';
         const res = await fetch(url, config);
         const data = await res.json();
-        console.log('daaaaaaaaaaaa', data)
+
         dispatch({
             type: actionTypes.FETCH_OFFERS_BY_OFFER_TYPE,
             payload: data.data,
