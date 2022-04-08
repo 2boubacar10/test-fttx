@@ -11,7 +11,7 @@ export default class LoadingPage extends Component {
         return <div className="component-loading-page">
             <ClipLoader color='#ffffff' />
             <p>
-                {this.props.subscriptionPaymentInProcess ? "Paiement" : "Chargement"}{" "}
+                {this.props.subscriptionPaymentByFreelancerInProcess ? "Paiement" : "Chargement"}{" "}
                 en cours
             </p>
         </div>;
