@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './newPrepaymentSubscription.css';
-import { Steps, Loader } from 'rsuite';
+import { Loader } from 'rsuite';
 import PrepaymentSubscriptionFields from '../prepaymentSubscriptionFields/index';
 import api from '../../config/global-vars';
 import axios from 'axios';
 import SubscriptionRecapitulatif from '../subscriptionRecapitulatif/subscriptionRecapitulatif';
-import { toastr } from 'react-redux-toastr';
-
 
 class NewPrepaymentSubscription extends Component {
     constructor(props) {
@@ -52,7 +50,7 @@ class NewPrepaymentSubscription extends Component {
 
         if (this.props.onValidatePrepaiedSubscriptionFields()) {
             this.setState({ savingSubscriptionProgress: true })
-            console.log("props", this.props.subscription)
+
             var api = this.state.api;
             const url = api + 'subscriptions';
             var config = this.state.requestConfig;
@@ -85,7 +83,7 @@ class NewPrepaymentSubscription extends Component {
                 .catch(error => {
                     this.setState({ savingSubscriptionProgress: false })
                     if (error) {
-                        toastr.error('Oups! Une erreur est survenue. Veuillez réessayer!');
+                        this.props.openSubscriptionFailed()
                     }
                 });
 
@@ -97,11 +95,6 @@ class NewPrepaymentSubscription extends Component {
 
         return <div className="component-new-prepayment-subscription">
             <form onSubmit={(e) => this.onSavePrepaiedSubscription(e)}>
-                <Steps current={step} vertical>
-                    <Steps.Item title={`Informations du client`} />
-                    <Steps.Item title="Récapitulatif" />
-                </Steps>
-
                 <div>
                     {step === 0 ?
                         (

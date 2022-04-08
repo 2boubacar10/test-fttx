@@ -8,6 +8,7 @@ export default class SubscriptionRecapitulatif extends Component {
     // }
     render() {
         return <div className="component-subscription-recapitulatif">
+            <p className='title-step'>Récapitulatif</p>
             <table className="table table-recapitulatif">
                 <tbody>
                     {this.props.subscription.civility ?

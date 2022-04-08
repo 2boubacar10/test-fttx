@@ -167,7 +167,7 @@ class PaymentView extends Component {
             paymentData['amount'] = this.state.totalMount;
             this.setState({ paymentData })
 
-            console.log('data', this.state.paymentData)
+            // console.log('data', this.state.paymentData)
             // axios.post(api+ "subscriptions/create_payment", paymentData, config )
             //     .then(response=>{
             //         console.log('response', response)
@@ -218,7 +218,11 @@ class PaymentView extends Component {
             confirmButtonText: 'Réessayer',
         }).then((result) => {
             if (result.isConfirmed) {
-                this.openPaymentConfirmation()
+                this.setState({ subscriptionPaymentByCustomerInProcess: true })
+                setTimeout(() => {
+                    this.openPaymentConfirmation()
+                    this.setState({ subscriptionPaymentByCustomerInProcess: false })
+                }, 2000);
             }
         })
     }
@@ -229,7 +233,6 @@ class PaymentView extends Component {
         if (this.state.subscriptionFetchingProgress || this.state.subscriptionPaymentByFreelancerInProcess) {
             return <LoadingPage subscriptionPaymentByFreelancerInProcess={this.state.subscriptionPaymentByFreelancerInProcess} />
         } else {
-            console.log('first render', paymentData)
             return <div className="component-create-subscription-request component-payment-view">
                 <div className="py-5">
                     <div className="container">

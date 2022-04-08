@@ -603,3 +603,9 @@ body {
 .theme-custom .pagination.react-bootstrap-table-page-btns-ul .active.page-item{
     color: #ffffff;
 }
+
+.title-step{
+    font-weight: 500;
+    font-size: 21px;
+    margin-bottom: 1.5rem;
+}

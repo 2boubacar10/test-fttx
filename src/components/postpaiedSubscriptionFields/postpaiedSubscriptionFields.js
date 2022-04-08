@@ -14,6 +14,7 @@ export default class PostpaiedSubscriptionFields extends Component {
     }
     render() {
         return <div className="component-postpaied-subscription-fields">
+            <p className='title-step'>Informations de l'entreprise</p>
             <div className="row">
                 <div className="col-sm-6 mb-4">
                     <div className="form-group">

@@ -173,6 +173,15 @@ class CreateSubscriptionRequest extends Component {
         }
     }
 
+    openSubscriptionFailed = (error) => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Souscription echoué!',
+            html: 'Oups! Une erreur est survenue.<br/><br/>' +
+                'La demande de souscription n\'a pas été enregistré.  Veuillez réessayer. <br/>',
+            confirmButtonText: 'Réessayer',
+        })
+    }
 
     onValidatePrepaiedSubscriptionFields = () => {
         let subscription = this.state.subscription
@@ -461,6 +470,7 @@ class CreateSubscriptionRequest extends Component {
                                 offers={this.props.offerByOfferType}
                                 paymentMethod={paymentMethod}
                                 openConfirmation={this.openConfirmation}
+                                openSubscriptionFailed={this.openSubscriptionFailed}
                                 onValidatePrepaiedSubscriptionFields={this.onValidatePrepaiedSubscriptionFields}
                                 dialCode={this.state.dialCode}
                             />
@@ -492,6 +502,7 @@ class CreateSubscriptionRequest extends Component {
                                 offers={this.props.offerByOfferType}
                                 paymentMethod={paymentMethod}
                                 openConfirmation={this.openConfirmation}
+                                openSubscriptionFailed={this.openSubscriptionFailed}
                                 onValidatePostpaiedSubscriptionFields={this.onValidatePostpaiedSubscriptionFields}
                                 dialCode={this.state.dialCode}
 
