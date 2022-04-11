@@ -15,6 +15,7 @@ import Dashboard from './components/dashboard/index';
 import PaymentView from './components/paymentView/index';
 import { Offline } from "react-detect-offline";
 import { Modal } from 'rsuite';
+import * as Sentry from "@sentry/react";
 
 class App extends Component {
     render() {
@@ -65,4 +66,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Sentry.withProfiler(App);
