@@ -78,13 +78,20 @@ class CreateSubscriptionRequest extends Component {
         this.handleChangeSubscriptionFile = this.handleChangeSubscriptionFile.bind(this);
     }
 
+    componentWillMount() {
+        var userToken = this.state.userToken;
+        if (!userToken) {
+            window.location.reload()
+        }
+    }
+
     componentDidMount() {
         var config = this.state.requestConfig;
+        var userToken = this.state.userToken;
 
-        this.props.fetchAllAreas(config);
-        this.props.fetchOffersByOfferType("particulier", config)
-
-        if (this.state.userToken) {
+        if (userToken) {
+            this.props.fetchAllAreas(config);
+            this.props.fetchOffersByOfferType("particulier", config)
             this.props.fetchUserConnected(config)
         }
     }
@@ -97,7 +104,11 @@ class CreateSubscriptionRequest extends Component {
 
     handleChangeSelectArea = (value, item) => {
         var config = this.state.requestConfig;
-        this.props.fetchBuildingByArea(value, config)
+        var userToken = this.state.userToken;
+
+        if (userToken) {
+            this.props.fetchBuildingByArea(value, config)
+        }
 
         let subscription = this.state.subscription
         subscription['zone_id'] = value;
@@ -427,8 +438,12 @@ class CreateSubscriptionRequest extends Component {
     navigationButtonSubscriptionButton = (e, param) => {
         e.preventDefault();
         var config = this.state.requestConfig;
+        var userToken = this.state.userToken;
 
-        this.props.fetchOffersByOfferType(param, config)
+        if (userToken) {
+            this.props.fetchOffersByOfferType(param, config)
+        }
+
     }
 
     render() {

@@ -13,6 +13,8 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import Dashboard from './components/dashboard/index';
 import PaymentView from './components/paymentView/index';
+import { Offline } from "react-detect-offline";
+import { Modal } from 'rsuite';
 
 class App extends Component {
     render() {
@@ -47,6 +49,17 @@ class App extends Component {
                             closeOnToastrClick />
                     </div>
                 </Provider>
+
+                <Offline>
+                    <div className="modal-container">
+                        <Modal size="xs" open={true} backdrop={true} className="rsuite-content-modal-custom modal-no-connexion">
+                            <Modal.Body>
+
+                                <p>Un problème est survenue!<br />Veuillez vérifier votre connexion internet.</p>
+                            </Modal.Body>
+                        </Modal>
+                    </div>
+                </Offline>
             </Router >
         );
     }

@@ -6,14 +6,15 @@ import PrepaidSubscriptionList from '../prepaidSubscriptionList/index';
 import PostpaiedSubscriptionList from '../postpaiedSubscriptionList/index';
 import { connect } from 'react-redux';
 import { fetchParticularSubscriptionsByFreelancer, fetchProfessionnelSubscriptionsByFreelancer } from '../../redux/Subscription/subscription-actions';
-import { NavLink } from "react-router-dom";
-import { IoAddOutline } from 'react-icons/io5';
+// import { NavLink } from "react-router-dom";
+// import { IoAddOutline } from 'react-icons/io5';
 import LoadingPage from '../loadingPage/index';
 
 class ListOfSubscriptionRequests extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            userToken: window.localStorage.getItem('userToken'),
             requestConfig: {
                 headers: { Authorization: `Bearer ${window.localStorage.getItem('userToken')}` }
             },
@@ -24,13 +25,21 @@ class ListOfSubscriptionRequests extends Component {
         };
     }
 
+    componentWillMount() {
+        var userToken = this.state.userToken;
+        if (!userToken) {
+            window.location.reload()
+        }
+
+        this.setState({ fetchingSubscriptionProgress: true })
+    }
+
     componentDidMount() {
         var config = this.state.requestConfig;
         var userID = this.state.userID;
+        var userToken = this.state.userToken;
 
-        this.setState({ fetchingSubscriptionProgress: true })
-
-        if (userID && config) {
+        if (userID && userToken) {
             this.props.fetchParticularSubscriptionsByFreelancer(userID, config)
             this.props.fetchProfessionnelSubscriptionsByFreelancer(userID, config)
         }
@@ -38,10 +47,13 @@ class ListOfSubscriptionRequests extends Component {
 
     componentWillReceiveProps(prevProps) {
         if (prevProps.particularSubscriptions) {
-            this.setState({ particularSubscriptions: prevProps.particularSubscriptions, fetchingSubscriptionProgress: false })
+            this.setState({ particularSubscriptions: prevProps.particularSubscriptions })
+            setTimeout(() => {
+                this.setState({ fetchingSubscriptionProgress: false })
+            }, 300);
         }
         if (prevProps.professionnalSubscriptions) {
-            this.setState({ professionnalSubscriptions: prevProps.professionnalSubscriptions, fetchingSubscriptionProgress: false })
+            this.setState({ professionnalSubscriptions: prevProps.professionnalSubscriptions })
         }
     }
 

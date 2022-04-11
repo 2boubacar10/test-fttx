@@ -6,6 +6,7 @@ import baseUrl from '../../config/backend-base-url';
 import axios from 'axios';
 import { toastr } from 'react-redux-toastr';
 import { Loader } from 'rsuite';
+import { VscEyeClosed, VscEye } from "react-icons/vsc";
 
 export default class AuthLogin extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ export default class AuthLogin extends Component {
             unauthorizedUser: false,
             validationIsNotDone: false,
             path: '',
+            typePasswordInput: 'password',
         };
         this.handleChange = this.handleChange.bind(this)
         this.onSubmitLogin = this.onSubmitLogin.bind(this)
@@ -95,10 +97,7 @@ export default class AuthLogin extends Component {
                 })
                 .catch((error) => {
                     this.setState({ loginInProgress: false })
-
-                    if (error && error.message === "Network Error") {
-                        toastr.error('Veuillez vérifier votre connexion internet!');
-                    } else if (error && error.response.data.error === "Unauthorized") {
+                    if (error && error.response.data.error === "Unauthorized") {
                         this.setState({ unauthorizedUser: true })
                         setTimeout(() => {
                             this.setState({ unauthorizedUser: false })
@@ -113,6 +112,10 @@ export default class AuthLogin extends Component {
                 })
         }
     }
+
+    handleClick = () => this.setState(({ typePasswordInput }) => ({
+        typePasswordInput: typePasswordInput === 'text' ? 'password' : 'text'
+    }))
 
     render() {
         return <div className="component-auth-login component-auth mt-5">
@@ -135,7 +138,12 @@ export default class AuthLogin extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="LoginPassword">Mot de passe</label>
-                                        <input type="password" onChange={this.handleChange} name='password' className={`form-control ${this.state.is_empty_password && 'is-invalid'}`} id="LoginPassword" />
+                                        <div className="input-password-theme">
+                                            <input type={this.state.typePasswordInput} onChange={this.handleChange} name='password' className={`form-control ${this.state.is_empty_password && 'is-invalid'}`} id="LoginPassword" />
+                                            {this.state.fields.password.length > 0 &&
+                                                <span className="btn-show-hide" onClick={this.handleClick}>{this.state.typePasswordInput === 'text' ? <VscEyeClosed /> : <VscEye />}</span>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
                                 {this.state.loginInProgress ?
