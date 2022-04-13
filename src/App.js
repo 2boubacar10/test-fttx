@@ -16,6 +16,7 @@ import PaymentView from './components/paymentView/index';
 import { Offline } from "react-detect-offline";
 import { Modal } from 'rsuite';
 import * as Sentry from "@sentry/react";
+import NetworkErrorIcon from "./images/icons/internet.svg"
 
 class App extends Component {
     render() {
@@ -55,7 +56,7 @@ class App extends Component {
                     <div className="modal-container">
                         <Modal size="xs" open={true} backdrop={true} className="rsuite-content-modal-custom modal-no-connexion">
                             <Modal.Body>
-
+                                <img src={NetworkErrorIcon} alt='' />
                                 <p>Un problème est survenue!<br />Veuillez vérifier votre connexion internet.</p>
                             </Modal.Body>
                         </Modal>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './prepaidSubscriptionList.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
-// import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
 

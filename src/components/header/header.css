@@ -10,7 +10,7 @@
     left: -250px;
     overflow-x: hidden;
     transition: 0.5s;
-    background: #cc0000;
+    background: #ffffff;
 
 }
 
@@ -42,7 +42,7 @@
 }
 
 .btnCloseOpenThemeSidenavMobile.close-icon {
-    color: #ffffff;
+    color: #cc0000;
     right: 1.3rem;
     position: absolute;
 }

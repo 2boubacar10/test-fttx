@@ -204,7 +204,7 @@ export default class PostpaiedSubscriptionFields extends Component {
                                 this.setState({ subscription })
                             }}
                         >
-                            <Radio value="cni">Pièce sénégalaise</Radio>
+                            <Radio value="cni">Pièce d'identité</Radio>
                             <Radio value="passport">Passeport</Radio>
                         </RadioGroup>
 

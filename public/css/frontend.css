@@ -329,7 +329,7 @@ body {
 .logout-btn {
     padding: 0;
     background: transparent;
-    color: #FFFFFF;
+    color: #cc0000;
     font-size: 15px;
     display: flex;
     align-items: center;
@@ -608,6 +608,17 @@ body {
     font-weight: 500;
     font-size: 21px;
     margin-bottom: 1.5rem;
+}
+
+.modal-no-connexion img{
+    width: 100px;
+    margin-bottom: 1rem;
+} 
+
+.modal-no-connexion .rs-modal-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .modal-no-connexion{
