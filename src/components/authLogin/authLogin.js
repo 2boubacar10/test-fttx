@@ -134,12 +134,26 @@ export default class AuthLogin extends Component {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="loginemail">Numéro de téléphone ou e-mail</label>
-                                        <input type="text" onChange={this.handleChange} name='email' className={`form-control ${this.state.is_empty_email && 'is-invalid'}`} id="loginemail" />
+                                        <input
+                                            type="text"
+                                            onChange={this.handleChange}
+                                            name='email'
+                                            className={`form-control ${this.state.is_empty_email && 'is-invalid'}`}
+                                            id="loginemail"
+                                            disabled={this.state.loginInProgress}
+                                        />
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="LoginPassword">Mot de passe</label>
                                         <div className="input-password-theme">
-                                            <input type={this.state.typePasswordInput} onChange={this.handleChange} name='password' className={`form-control ${this.state.is_empty_password && 'is-invalid'}`} id="LoginPassword" />
+                                            <input
+                                                type={this.state.typePasswordInput}
+                                                onChange={this.handleChange}
+                                                name='password'
+                                                className={`form-control ${this.state.is_empty_password && 'is-invalid'}`}
+                                                id="LoginPassword"
+                                                disabled={this.state.loginInProgress}
+                                            />
                                             {this.state.fields.password.length > 0 &&
                                                 <span className="btn-show-hide" onClick={this.handleClick}>{this.state.typePasswordInput === 'text' ? <VscEyeClosed /> : <VscEye />}</span>
                                             }

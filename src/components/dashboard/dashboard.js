@@ -26,7 +26,6 @@ class Dashboard extends Component {
         return <div className="component-dashboard">
             <Header />
             <div className="content-section">
-                <h5 className='theme-title'>Tableau de bord</h5>
 
             </div>
             <FooterNavigation />
