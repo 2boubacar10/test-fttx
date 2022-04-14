@@ -184,7 +184,7 @@ class CreateSubscriptionRequest extends Component {
         }
     }
 
-    openSubscriptionFailed = (error) => {
+    openSubscriptionFailed = () => {
         Swal.fire({
             icon: 'error',
             title: 'Souscription echoué!',

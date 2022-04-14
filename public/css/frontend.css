@@ -651,3 +651,37 @@ body {
     letter-spacing: 0.25em;
     padding-right: 3rem;
 }
+
+.search-block {
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1)
+}
+
+.search-block input {
+    height: 45px !important;
+    padding-right: 4rem;
+    border: 2px solid #d6d4d4
+}
+
+.search-block input:focus {
+    box-shadow: none;
+    border: 2px solid #cc0000
+}
+
+.search-block button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 35px;
+    width: 50px;
+    background: #cc0000;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff !important;
+}
+
+.search-block button:hover, .search-block button:focus {
+    opacity: .7;
+}
