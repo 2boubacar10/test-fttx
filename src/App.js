@@ -17,6 +17,7 @@ import { Offline } from "react-detect-offline";
 import { Modal } from 'rsuite';
 import * as Sentry from "@sentry/react";
 import NetworkErrorIcon from "./images/icons/internet.svg"
+import PaymentsList from './components/paymentsList/index';
 
 class App extends Component {
     render() {
@@ -37,6 +38,9 @@ class App extends Component {
                             </Route>
                             <Route path="/liste-des-souscriptions">
                                 {isLogInExpired || isLogInExpired === undefined ? <Redirect to={`/?next=${'/liste-des-souscriptions'}`} /> : <ListOfSubscriptionRequests />}
+                            </Route>
+                            <Route path="/liste-des-paiements">
+                                {isLogInExpired || isLogInExpired === undefined ? <Redirect to={`/?next=${'/liste-des-paiements'}`} /> : <PaymentsList />}
                             </Route>
                         </Switch >
                         <ReduxToastr

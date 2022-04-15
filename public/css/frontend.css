@@ -367,6 +367,12 @@ body {
     overflow-x: auto;
 }
 
+.bootstrap-table-custom ul:first-child{
+    display: none;
+}
+ 
+.bootstrap-table-custom .search-label{margin-bottom: 0;}
+
 .theme-custom .page-item.active .page-link {
     z-index: 3;
     color: #fff;
@@ -684,4 +690,21 @@ body {
 
 .search-block button:hover, .search-block button:focus {
     opacity: .7;
+}
+
+.btn-icon-theme-light{
+    background: #b6b8ba;
+    color: #ffffff;
+    font-size: 17px;
+    padding: 0px 10px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon-theme-light:hover{
+    color: #ffffff;
+    text-decoration: none;
+    background: #3c3a39;
 }

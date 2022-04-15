@@ -5,6 +5,7 @@ import buildingReducer from './Building/building-reducer';
 import offerReducer from './Offer/offer-reducer';
 import subscriptionReducer from './Subscription/subscription-reducer';
 import userReducer from './User/user-reducer';
+import paymentReducer from './Payment/payment-reducer';
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     buildings: buildingReducer,
     offers: offerReducer,
     subscriptions: subscriptionReducer,
-    users: userReducer
+    users: userReducer,
+    payments: paymentReducer
 
 });
 

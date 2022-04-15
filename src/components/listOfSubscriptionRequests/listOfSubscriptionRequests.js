@@ -72,7 +72,7 @@ class ListOfSubscriptionRequests extends Component {
                                 <button className="nav-link" id="nav-professionnel-tab" data-bs-toggle="tab" data-bs-target="#nav-professionnel" type="button" role="tab" aria-controls="nav-professionnel" aria-selected="false">Professionnel</button>
                             </div>
                         </nav>
-                            <div className="tab-content pt-5" id="nav-tabContent">
+                            <div className="tab-content pt-4" id="nav-tabContent">
                                 <div className="tab-pane fade show active" id="nav-particulier" role="tabpanel" aria-labelledby="nav-particulier-tab">
                                     {/* <NavLink className={"link-theme-with-icon mb-3 trans-0-2"} to={'/souscription'}><IoAddOutline />Créer une souscription</NavLink> */}
                                     <PrepaidSubscriptionList

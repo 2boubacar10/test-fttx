@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 
 const paymentMethod = [
     { name: "Free Money" },
-    { name: "Espèce" }
+    { name: "Cash" }
 ];
 
 class CreateSubscriptionRequest extends Component {

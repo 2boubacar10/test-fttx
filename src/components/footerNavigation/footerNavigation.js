@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './footerNavigation.css';
-import { IoHomeOutline, IoCreateOutline, IoListOutline } from 'react-icons/io5';
+import { IoHomeOutline, IoCreateOutline, IoCashOutline } from 'react-icons/io5';
 
 
 export default class FooterNavigation extends Component {
@@ -15,13 +15,13 @@ export default class FooterNavigation extends Component {
                 <IoHomeOutline />
                 <span>Accueil</span>
             </NavLink>
-            <NavLink className={"nav-button trans-0-2"} to={"/souscription"}>
+            <NavLink className={"nav-button trans-0-2"} to={"/liste-des-souscriptions"}>
                 <IoCreateOutline />
                 <span>Souscription</span>
             </NavLink>
-            <NavLink className={"nav-button trans-0-2"} to={"/liste-des-souscriptions"}>
-                <IoListOutline />
-                <span>Liste</span>
+            <NavLink className={"nav-button trans-0-2"} to={"/liste-des-paiements"}>
+                <IoCashOutline />
+                <span>Paiement</span>
             </NavLink>
         </div>;
     }

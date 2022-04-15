@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import './postpaiedSubscriptionList.css';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
-// import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
+import { NavLink } from 'react-router-dom';
+import { ImFileText2 } from 'react-icons/im';
 
 const { SearchBar } = Search;
 
@@ -63,18 +64,14 @@ export default class PostpaiedSubscriptionList extends Component {
         this.state = {};
     }
 
-    noDataMessage() {
-        return "Il n'y a pas de souscription post paiement trouvé!";
-    }
-
     render() {
         const options = {
             custom: true,
             paginationSize: 4,
             pageStartIndex: 1,
             firstPageText: 'Première',
-            prePageText: 'Retour',
-            nextPageText: 'Suivant',
+            prePageText: '<',
+            nextPageText: '>',
             lastPageText: 'Dernier',
             nextPageTitle: 'Première page',
             prePageTitle: 'Page Precèdente',
@@ -92,22 +89,24 @@ export default class PostpaiedSubscriptionList extends Component {
                     columns={columns}
                     data={this.props.professionnalSubscriptions}
                     search
-                    noDataMessage={this.noDataMessage}
-                // bordered={false}
                 >
                     {
                         toolkitprops => (
                             <div>
-                                <SearchBar
-                                    {...toolkitprops.searchProps}
-                                    placeholder={"Rechercher ..."}
-                                    className={"mb-3 w-auto"}
-                                />
+                                <div className="mb-3 d-flex justify-content-between">
+                                    <SearchBar
+                                        {...toolkitprops.searchProps}
+                                        placeholder={"Rechercher ..."}
+                                        className={"w-auto"}
+                                    />
+                                    <NavLink to={"/souscription"} className={"btn-icon-theme-light trans-0-2"}><ImFileText2 /></NavLink>
+                                </div>
                                 <BootstrapTable
                                     striped
                                     hover
                                     {...toolkitprops.baseProps}
                                     {...paginationTableProps}
+                                    noDataIndication={() => ("Aucune souscription postpayée disponible.")}
                                 />
                             </div>
                         )
