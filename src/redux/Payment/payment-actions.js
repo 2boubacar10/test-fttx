@@ -4,7 +4,7 @@ import * as actionTypes from './payment-types';
 export const fetchPaymentsByFreelancer = (userId, config) => {
 
     return async (dispatch) => {
-        const url = api + 'subscriptions/' + 2 + '/payments';
+        const url = api + 'subscriptions/' + userId + '/payments';
         const res = await fetch(url, config);
         const data = await res.json();
 
