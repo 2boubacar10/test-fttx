@@ -161,10 +161,32 @@ class PaymentView extends Component {
 
         if (this.onValidateCustomerNumber()) {
             this.setState({ subscriptionPaymentByCustomerInProcess: true })
-            setTimeout(() => {
-                this.openPaymentFailure()
-                this.setState({ subscriptionPaymentByCustomerInProcess: false })
-            }, 1000);
+
+            var config = this.state.requestConfig;
+            var subscription = this.state.subscription;
+            const url = this.state.api + "setDemandePaiementClient";
+
+            var paymentData = this.state.paymentData;
+            paymentData['subscription_number'] = subscription.number;
+            paymentData['phone_number'] = paymentData.customer_number;
+
+            console.log('pay', paymentData)
+            this.setState({ paymentData })
+
+            axios.post(url, paymentData, config)
+                .then(response => {
+                    console.log('response', response)
+                    // this.openPaymentConfirmation()
+                    // this.setState({ subscriptionPaymentByCustomerInProcess: false })
+                })
+                .catch(error => {
+                    this.setState({ subscriptionPaymentByCustomerInProcess: false })
+                    console.log("error", error.response)
+                    if (error) {
+                        this.openPaymentFailure()
+                    }
+                })
+
         }
     }
 
@@ -184,15 +206,16 @@ class PaymentView extends Component {
             paymentData['frais_installation'] = this.state.installationCost;
             paymentData['subscription_number'] = subscription.number;
             paymentData['montant_ttc'] = this.state.totalMount;
-            paymentData['amount'] = this.state.totalMount;
 
             this.setState({ paymentData })
 
             axios.post(url, paymentData, config)
                 .then(response => {
-                    console.log('response', response)
-                    this.openPaymentConfirmation()
                     this.setState({ subscriptionPaymentByFreelancerInProcess: false })
+                    if (response.data.resultCode === -1) {
+                        this.openPaymentConfirmation()
+                    }
+                    console.log('response', response)
                 })
                 .catch(error => {
                     this.setState({ subscriptionPaymentByFreelancerInProcess: false })
@@ -269,8 +292,11 @@ class PaymentView extends Component {
             title: 'Paiement echoué!',
             html: 'Le paiement a échoué. Merci de réessayé. <br/>',
             confirmButtonText: 'Réessayer',
+            showDenyButton: true,
+            denyButtonColor: "#b6b8ba",
+            denyButtonText: `Fermer`,
         }).then((result) => {
-            if (result.isConfirmed) {
+            if (result.isDenied) {
                 window.location.href = "/liste-des-paiements"
             }
         })

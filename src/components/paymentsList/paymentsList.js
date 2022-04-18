@@ -36,14 +36,14 @@ function PriceAndDate(cell, row) {
 
 const columns = [
     {
-        dataField: 'offer_name',
-        text: 'offer name',
+        dataField: 'subscription_number',
+        text: 'subscription number',
         formatter: informations,
         style: { width: 250 }
     },
     {
-        dataField: 'status_name',
-        text: 'status name',
+        dataField: 'customer_name',
+        text: 'customer name',
         sort: true,
         formatter: paymentStatus,
         style: { width: 250, textAlign: "center" }
