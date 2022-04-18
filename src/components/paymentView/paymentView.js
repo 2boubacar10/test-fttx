@@ -269,7 +269,12 @@ class PaymentView extends Component {
             title: 'Paiement echoué!',
             html: 'Le paiement a échoué. Merci de réessayé. <br/>',
             confirmButtonText: 'Réessayer',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/liste-des-paiements"
+            }
         })
+
     }
 
     render() {

@@ -86,6 +86,16 @@ export default class SubscriptionRecapitulatif extends Component {
                         <td className='text-capitalize value'>{this.props.subscription.identity_type}</td>
                     </tr>
                     <tr>
+                        <td className='fw-600'>Numero pièce</td>
+                        <td className='text-capitalize value'>{this.props.subscription.identity_number}</td>
+                    </tr>
+                    {this.props.subscription.cni_compte ?
+                        <tr>
+                            <td className='fw-600'>CNI compte</td>
+                            <td className='text-capitalize value'>{this.props.subscription.cni_compte}</td>
+                        </tr> : null
+                    }
+                    <tr>
                         <td className='fw-600'>{this.props.subscription.identity_type === "cni" ? "Pièce d'identité(recto)" : "Passeport"}</td>
                         <td className='text-capitalize value'>{this.props.subscription.identity_photo_recto_filename}</td>
                     </tr>

@@ -68,6 +68,8 @@ export default class NewPostpaiedSubscription extends Component {
             data.append('email', this.props.subscription.email)
             data.append('contract_photo', this.props.subscription.contract_photo)
             data.append('identity_type', this.props.subscription.identity_type)
+            data.append('identity_number', this.props.subscription.identity_number)
+            data.append('cni_compte', this.props.subscription.cni_compte || this.props.subscription.identity_number)
             data.append('identity_photo_recto', this.props.subscription.identity_photo_recto)
             data.append('identity_photo_verso', this.props.subscription.identity_photo_verso)
             data.append('payment_method', this.props.subscription.payment_method)
@@ -113,6 +115,7 @@ export default class NewPostpaiedSubscription extends Component {
                                 is_empty_email={this.props.is_empty_email}
                                 is_empty_contract_photo={this.props.is_empty_contract_photo}
                                 is_empty_identity_type={this.props.is_empty_identity_type}
+                                is_empty_identity_number={this.props.is_empty_identity_number}
                                 is_empty_identity_photo_recto={this.props.is_empty_identity_photo_recto}
                                 is_empty_identity_photo_verso={this.props.is_empty_identity_photo_verso}
                                 is_empty_payment_method={this.props.is_empty_payment_method}

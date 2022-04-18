@@ -40,6 +40,8 @@ class CreateSubscriptionRequest extends Component {
                 contract_photo: "",
                 contract_photo_filename: "Choisir un fichier",
                 identity_type: "cni",
+                identity_number: "",
+                cni_compte: "",
                 identity_photo_recto: "",
                 identity_photo_recto_filename: "Choisir un fichier",
                 identity_photo_verso: "",
@@ -63,6 +65,7 @@ class CreateSubscriptionRequest extends Component {
             is_empty_email: false,
             is_empty_contract_photo: false,
             is_empty_identity_type: false,
+            is_empty_identity_number: false,
             is_empty_identity_photo_recto: false,
             is_empty_identity_photo_verso: false,
             is_empty_payment_method: false,
@@ -284,6 +287,15 @@ class CreateSubscriptionRequest extends Component {
                 this.setState({ is_empty_identity_type: false })
             }, 10000);
         }
+
+        if (!subscription['identity_number']) {
+            isValidForm = false
+            this.setState({ is_empty_identity_number: true })
+            setTimeout(() => {
+                this.setState({ is_empty_identity_number: false })
+            }, 10000);
+        }
+
         if (!subscription['identity_photo_recto']) {
             isValidForm = false
             this.setState({ is_empty_identity_photo_recto: true })
@@ -291,6 +303,7 @@ class CreateSubscriptionRequest extends Component {
                 this.setState({ is_empty_identity_photo_recto: false })
             }, 10000);
         }
+
         if (subscription['identity_type'] === "cni") {
             if (!subscription['identity_photo_verso']) {
                 isValidForm = false
@@ -300,6 +313,7 @@ class CreateSubscriptionRequest extends Component {
                 }, 10000);
             }
         }
+
         if (!subscription['payment_method']) {
             isValidForm = false
             this.setState({ is_empty_payment_method: true })
@@ -394,6 +408,15 @@ class CreateSubscriptionRequest extends Component {
                 this.setState({ is_empty_identity_type: false })
             }, 10000);
         }
+
+        if (!subscription['identity_number']) {
+            isValidForm = false
+            this.setState({ is_empty_identity_number: true })
+            setTimeout(() => {
+                this.setState({ is_empty_identity_number: false })
+            }, 10000);
+        }
+
         if (!subscription['identity_photo_recto']) {
             isValidForm = false
             this.setState({ is_empty_identity_photo_recto: true })
@@ -401,6 +424,7 @@ class CreateSubscriptionRequest extends Component {
                 this.setState({ is_empty_identity_photo_recto: false })
             }, 10000);
         }
+
         if (subscription['identity_type'] === "cni") {
             if (!subscription['identity_photo_verso']) {
                 isValidForm = false
@@ -410,6 +434,7 @@ class CreateSubscriptionRequest extends Component {
                 }, 10000);
             }
         }
+
         if (!subscription['payment_method']) {
             isValidForm = false
             this.setState({ is_empty_payment_method: true })
@@ -417,6 +442,7 @@ class CreateSubscriptionRequest extends Component {
                 this.setState({ is_empty_payment_method: false })
             }, 10000);
         }
+
         if (!subscription['commercial_register_file']) {
             isValidForm = false
             this.setState({ is_empty_commercial_register_file: true })
@@ -424,6 +450,7 @@ class CreateSubscriptionRequest extends Component {
                 this.setState({ is_empty_commercial_register_file: false })
             }, 10000);
         }
+
         if (!subscription['commercial_register_number']) {
             isValidForm = false
             this.setState({ is_empty_commercial_register_number: true })
@@ -476,6 +503,7 @@ class CreateSubscriptionRequest extends Component {
                                 is_empty_email={this.state.is_empty_email}
                                 is_empty_contract_photo={this.state.is_empty_contract_photo}
                                 is_empty_identity_type={this.state.is_empty_identity_type}
+                                is_empty_identity_number={this.state.is_empty_identity_number}
                                 is_empty_identity_photo_recto={this.state.is_empty_identity_photo_recto}
                                 is_empty_identity_photo_verso={this.state.is_empty_identity_photo_verso}
                                 is_empty_payment_method={this.state.is_empty_payment_method}
@@ -506,6 +534,7 @@ class CreateSubscriptionRequest extends Component {
                                 is_empty_email={this.state.is_empty_email}
                                 is_empty_contract_photo={this.state.is_empty_contract_photo}
                                 is_empty_identity_type={this.state.is_empty_identity_type}
+                                is_empty_identity_number={this.state.is_empty_identity_number}
                                 is_empty_identity_photo_recto={this.state.is_empty_identity_photo_recto}
                                 is_empty_identity_photo_verso={this.state.is_empty_identity_photo_verso}
                                 is_empty_payment_method={this.state.is_empty_payment_method}
