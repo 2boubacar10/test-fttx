@@ -519,25 +519,6 @@ body {
     background-color: #cc0000 !important;
 }
 
-.buttonKey_Zp8OG {
-    height: 40px;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex: 1 0 30%;
-    margin: 5px;
-}
-
-.numpad_3qi4B {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.random-numpad-container {
-    margin: -5px;
-}
 #search-bar-0-label{
     display: none;
 }
@@ -695,7 +676,7 @@ body {
 .btn-icon-theme-light{
     background: #b6b8ba;
     color: #ffffff;
-    font-size: 17px;
+    font-size: 20px;
     padding: 0px 10px;
     border-radius: 4px;
     display: flex;

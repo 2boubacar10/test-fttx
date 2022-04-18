@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { fetchSubscriptionById } from '../../redux/Subscription/subscription-actions';
 import LoadingPage from '../loadingPage/index';
 import api from '../../config/global-vars';
-// import axios from 'axios';
+import axios from 'axios';
 import Swal from 'sweetalert2';
 
 class PaymentView extends Component {
@@ -24,6 +24,7 @@ class PaymentView extends Component {
             subscriptionPaymentByFreelancerInProcess: false,
             subscriptionPaymentByCustomerInProcess: false,
             subscriptionID: this.props.match.params.id,
+            secretCodeArrayValue: [],
             secretCodeValue: "",
             subscriptionFetchingProgress: false,
             subscription: {},
@@ -32,7 +33,10 @@ class PaymentView extends Component {
             totalMount: 0,
             paymentData: { customer_number: "" },
             is_empty_customer_number: false,
-            no_correct_format_customer_number: false
+            no_correct_format_customer_number: false,
+            randomKeyboard: [],
+            getRandomKeyboardProgress: false,
+            user: {}
 
         };
     }
@@ -55,12 +59,14 @@ class PaymentView extends Component {
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.changePercent(this.state.step - 1);
+        this.setState({ secretCodeArrayValue: [], secretCodeValue: "" })
     }
 
     suivant = (e) => {
         e.preventDefault()
         window.scrollTo({ top: 0, behavior: 'smooth' });
         var step = this.state.step
+
         if (step <= 1) {
             if (this.onValidateCustomerNumber()) {
                 this.changePercent(this.state.step + 1);
@@ -73,6 +79,7 @@ class PaymentView extends Component {
         var subscriptionID = this.state.subscriptionID;
         var userToken = this.state.userToken;
 
+        this.onGetRandomKeypad()
         if (subscriptionID && userToken) {
             this.props.fetchSubscriptionById(subscriptionID, config)
         }
@@ -165,47 +172,89 @@ class PaymentView extends Component {
         if (this.onValidateCustomerNumber()) {
             this.setState({ subscriptionPaymentByFreelancerInProcess: true })
 
-            // var api = this.state.api;
-            // var config = this.state.requestConfig;
+            var config = this.state.requestConfig;
+            var subscription = this.state.subscription;
+            const url = this.state.api + "subscriptions/merchant_payment";
+
             var paymentData = this.state.paymentData;
             paymentData['pin'] = this.state.secretCodeValue;
+            paymentData['prix_offre'] = subscription.offer.monthly_payment;
+            paymentData['frais_timbre'] = subscription.offer.stamp;
+            paymentData['tax'] = 0;
+            paymentData['frais_installation'] = this.state.installationCost;
+            paymentData['subscription_number'] = subscription.number;
+            paymentData['montant_ttc'] = this.state.totalMount;
             paymentData['amount'] = this.state.totalMount;
+
             this.setState({ paymentData })
 
-            // console.log('data', this.state.paymentData)
-            // axios.post(api+ "subscriptions/create_payment", paymentData, config )
-            //     .then(response=>{
-            //         console.log('response', response)
-            //     })
-            //     .catch(error=>{
-            //         if (error) {
-            //             console.log("error", error.response)
-            //         }
-            //     })
-
-            setTimeout(() => {
-                this.setState({ subscriptionPaymentByFreelancerInProcess: false })
-                this.openPaymentConfirmation()
-            }, 3000);
+            axios.post(url, paymentData, config)
+                .then(response => {
+                    console.log('response', response)
+                    this.openPaymentConfirmation()
+                    this.setState({ subscriptionPaymentByFreelancerInProcess: false })
+                })
+                .catch(error => {
+                    this.setState({ subscriptionPaymentByFreelancerInProcess: false })
+                    console.log("error", error.response)
+                    if (error && error.response.data.resultCode === -1) {
+                        this.openPaymentFailure()
+                    }
+                })
         }
 
     }
 
-    handleChangeSecretCode = (secretCode) => {
-        this.setState({ secretCodeValue: secretCode })
-        if (secretCode.length === 4) {
+    handleChangeSecretCode = (e, index) => {
+        e.preventDefault();
+
+        var secretCodeArrayValue = this.state.secretCodeArrayValue;
+        var secretCodeValue = this.state.secretCodeValue;
+        secretCodeArrayValue.push(index);
+        secretCodeValue = secretCodeValue + index;
+        this.setState({ secretCodeArrayValue, secretCodeValue })
+
+        if (secretCodeArrayValue.length === 4) {
             setTimeout(() => {
                 this.onFreelancerInitSubscriptionPayment()
+                this.setState({ secretCodeArrayValue: [], secretCodeValue: "" })
             }, 200);
         }
+    }
+
+    onEraseSecretCode = (e) => {
+        e.preventDefault();
+
+        var secretCodeArrayValue = this.state.secretCodeArrayValue;
+        var secretCodeValue = this.state.secretCodeValue;
+        secretCodeArrayValue.pop();
+        secretCodeValue = secretCodeValue.substring(0, secretCodeValue.length - 1)
+        this.setState({ secretCodeArrayValue, secretCodeValue })
+
+    }
+
+    onGetRandomKeypad = () => {
+        this.setState({ getRandomKeyboardProgress: true })
+
+        var config = this.state.requestConfig;
+        const url = this.state.api + "keypad/generate";
+        axios.get(url, config)
+            .then((response) => {
+                if (response.status === 200) {
+                    this.setState({ randomKeyboard: response.data.data, getRandomKeyboardProgress: false })
+                }
+            }).catch((error) => {
+                if (error) {
+                    this.setState({ getRandomKeyboardProgress: false })
+                }
+            });
     }
 
     openPaymentConfirmation = () => {
         Swal.fire({
             icon: 'success',
             title: 'Paiement effectué!',
-            html:
-                'Le paiement a bien été encaissé. <br/>',
+            html: 'Le paiement a bien été encaissé. <br/>',
             confirmButtonText: 'Fermer',
         }).then((result) => {
             if (result.isConfirmed) {
@@ -218,22 +267,13 @@ class PaymentView extends Component {
         Swal.fire({
             icon: 'error',
             title: 'Paiement echoué!',
-            html:
-                'Le paiement a échoué. Merci de réessayé. <br/>',
+            html: 'Le paiement a échoué. Merci de réessayé. <br/>',
             confirmButtonText: 'Réessayer',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.setState({ subscriptionPaymentByCustomerInProcess: true })
-                setTimeout(() => {
-                    this.openPaymentConfirmation()
-                    this.setState({ subscriptionPaymentByCustomerInProcess: false })
-                }, 2000);
-            }
         })
     }
 
     render() {
-        const { step, subscription, paymentData } = this.state;
+        const { step, subscription, paymentData, randomKeyboard } = this.state;
 
         if (this.state.subscriptionFetchingProgress || this.state.subscriptionPaymentByFreelancerInProcess) {
             return <LoadingPage subscriptionPaymentByFreelancerInProcess={this.state.subscriptionPaymentByFreelancerInProcess} />
@@ -241,14 +281,8 @@ class PaymentView extends Component {
             return <div className="component-create-subscription-request component-payment-view">
                 <div className="py-5">
                     <div className="container">
-                        <h5 className='theme-title mb-5 text-left'>Paiement</h5>
+                        {step < 2 && <h5 className='theme-title mb-5'>Paiement</h5>}
                         <div>
-                            {/* <Steps current={step} vertical>
-                                <Steps.Item title={`Informations du paiement`} />
-                                <Steps.Item title="Récapitulatif" />
-                                <Steps.Item title="Paiement" />
-                            </Steps> */}
-
                             <div>
                                 {step === 0 ?
                                     <SubscriptionPaymentFields
@@ -261,7 +295,6 @@ class PaymentView extends Component {
                                         onSetCustomerPhone={this.handleCustomerPhone}
                                         is_empty_customer_number={this.state.is_empty_customer_number}
                                         no_correct_format_customer_number={this.state.no_correct_format_customer_number}
-
                                     />
                                     :
                                     step === 1 ?
@@ -272,10 +305,14 @@ class PaymentView extends Component {
                                             paymentData={paymentData}
                                         />
                                         :
-                                        step === 2 &&
+                                        step === 2 && randomKeyboard &&
                                         < SubscriptionPaymentKeypad
                                             handleChangeSecretCode={this.handleChangeSecretCode}
-                                            secretCodeValue={this.state.secretCodeValue}
+                                            onEraseSecretCode={this.onEraseSecretCode}
+                                            secretCodeArrayValue={this.state.secretCodeArrayValue}
+                                            randomKeyboard={randomKeyboard}
+                                            getRandomKeyboardProgress={this.state.getRandomKeyboardProgress}
+                                            onGetRandomKeypad={this.onGetRandomKeypad}
                                         />
                                 }
                             </div>
@@ -306,7 +343,7 @@ class PaymentView extends Component {
                                     <span className={step < 2 ? 'ms-auto btn-theme-step trans-0-2' : 'd-none'}
                                         onClick={(e) => this.suivant(e)}
                                     >
-                                        Suivant
+                                        Suivant {this.state.getRandomKeyboardProgress && <>"&nbsp;" <Loader /></>}
                                     </span>
                                 }
 
