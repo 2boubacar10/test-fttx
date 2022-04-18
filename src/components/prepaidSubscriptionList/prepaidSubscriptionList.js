@@ -5,7 +5,7 @@ import paginationFactory, { PaginationProvider, PaginationListStandalone } from 
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
 import { NavLink } from 'react-router-dom';
-import { ImFileText2 } from 'react-icons/im';
+import { BsFileEarmarkPlus } from 'react-icons/bs';
 
 const { SearchBar } = Search;
 
@@ -104,7 +104,7 @@ class PrepaidSubscriptionList extends Component {
                                         placeholder={"Rechercher ..."}
                                         className={"w-auto"}
                                     />
-                                    <NavLink to={"/souscription"} className={"btn-icon-theme-light trans-0-2"}><ImFileText2 /></NavLink>
+                                    <NavLink to={"/souscription"} className={"btn-icon-theme-light trans-0-2"}><BsFileEarmarkPlus /></NavLink>
                                 </div>
                                 <BootstrapTable
                                     striped

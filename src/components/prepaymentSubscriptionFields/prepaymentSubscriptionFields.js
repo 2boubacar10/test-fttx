@@ -144,6 +144,7 @@ export default class PrepaymentSubscriptionFields extends Component {
                             country={'sn'}
                             value={this.props.subscription.phone_number}
                             placeholder={"Numéro de téléphone professionnel"}
+                            defaultMask={".. ... .. .."}
                             onChange={this.handleChangeSubscriptionPhone}
                             inputProps={{
                                 name: 'phone_number',
@@ -200,38 +201,66 @@ export default class PrepaymentSubscriptionFields extends Component {
                             <Radio value="passport">Passeport</Radio>
                         </RadioGroup>
 
+                        <div className="form-group">
+                            <label htmlFor="identity_number" className="form-label">Numéro pièce</label>
+                            <input
+                                type="text"
+                                name='identity_number'
+                                onChange={this.props.handleChangeSubscription}
+                                className={`form-control ${this.props.is_empty_identity_number && 'is-invalid'}`}
+                                id="identity_number"
+                                value={this.props.subscription.identity_number}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div className="col-sm-6 mb-4">
+                    <div className="form-group">
+                        <label htmlFor="cni_compte" className="form-label">CNI compte</label>
+                        <input
+                            type="text"
+                            name='cni_compte'
+                            onChange={this.props.handleChangeSubscription}
+                            className={`form-control`}
+                            id="cni_compte"
+                            value={this.props.subscription.cni_compte}
+                        />
+                    </div>
+                </div>
+                <div className="col-sm-6 mb-4">
+                    <div className="form-group">
+                        <p>{this.props.subscription.identity_type === "cni" ? "Recto de la pièce" : "Photo du passeport"} </p>
+                        <div className={`custom-file ${this.props.is_empty_identity_photo_recto && 'is-invalid'}`}>
+                            <input
+                                type="file"
+                                name="identity_photo_recto"
+                                className={`custom-file-input`}
+                                id="identity_photo_recto"
+                                onChange={this.props.handleChangeSubscriptionFile}
+                                accept="image/*,.pdf"
+                            />
+                            <label className="custom-file-label" htmlFor="customFileInput">{this.props.subscription.identity_photo_recto_filename}</label>
+                        </div>
+                    </div>
+                </div>
+                {this.props.subscription.identity_type === "cni" &&
+                    <div className="col-sm-6 mb-4">
                         <div className="mb-3">
-                            <p>{this.props.subscription.identity_type === "cni" ? "Recto de la pièce" : "Photo du passeport"} </p>
-                            <div className={`custom-file ${this.props.is_empty_identity_photo_recto && 'is-invalid'}`}>
+                            <p>Verso de la pièce</p>
+                            <div className={`custom-file ${this.props.is_empty_identity_photo_verso && 'is-invalid'}`}>
                                 <input
                                     type="file"
-                                    name="identity_photo_recto"
+                                    name="identity_photo_verso"
                                     className={`custom-file-input`}
-                                    id="identity_photo_recto"
+                                    id="identity_photo_verso"
                                     onChange={this.props.handleChangeSubscriptionFile}
                                     accept="image/*,.pdf"
                                 />
-                                <label className="custom-file-label" htmlFor="customFileInput">{this.props.subscription.identity_photo_recto_filename}</label>
+                                <label className="custom-file-label" htmlFor="customFileInput">{this.props.subscription.identity_photo_verso_filename}</label>
                             </div>
                         </div>
-                        {this.props.subscription.identity_type === "cni" &&
-                            <div className="mb-3">
-                                <p>Verso de la pièce</p>
-                                <div className={`custom-file ${this.props.is_empty_identity_photo_verso && 'is-invalid'}`}>
-                                    <input
-                                        type="file"
-                                        name="identity_photo_verso"
-                                        className={`custom-file-input`}
-                                        id="identity_photo_verso"
-                                        onChange={this.props.handleChangeSubscriptionFile}
-                                        accept="image/*,.pdf"
-                                    />
-                                    <label className="custom-file-label" htmlFor="customFileInput">{this.props.subscription.identity_photo_verso_filename}</label>
-                                </div>
-                            </div>
-                        }
                     </div>
-                </div>
+                }
 
                 <div className="col-sm-6 mb-4">
                     <div className="form-group">

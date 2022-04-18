@@ -102,7 +102,7 @@ class Dashboard extends Component {
                         <input
                             onChange={this.handleChangeSubscriptionNumber}
                             value={this.state.subscriptionNumber}
-                            maxLength="6"
+                            maxLength="5"
                             className="form-control number-input-custom"
                             placeholder="ID souscription"
                         />

@@ -367,11 +367,13 @@ body {
     overflow-x: auto;
 }
 
-.bootstrap-table-custom ul:first-child{
+.bootstrap-table-custom ul:first-child {
     display: none;
 }
- 
-.bootstrap-table-custom .search-label{margin-bottom: 0;}
+
+.bootstrap-table-custom .search-label {
+    margin-bottom: 0;
+}
 
 .theme-custom .page-item.active .page-link {
     z-index: 3;
@@ -465,8 +467,10 @@ body {
     color: #3c3a39;
     align-items: center;
 }
+
 .link-theme-with-icon :hover {
-    text-decoration: none !important; color: #cc0000;
+    text-decoration: none !important;
+    color: #cc0000;
 }
 
 .link-theme-with-icon svg {
@@ -519,33 +523,15 @@ body {
     background-color: #cc0000 !important;
 }
 
-.buttonKey_Zp8OG {
-    height: 40px;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex: 1 0 30%;
-    margin: 5px;
-}
-
-.numpad_3qi4B {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.random-numpad-container {
-    margin: -5px;
-}
-#search-bar-0-label{
+#search-bar-0-label {
     display: none;
 }
 
-.theme-custom .rs-modal-title{
+.theme-custom .rs-modal-title {
     color: #cc0000 !important;
     margin-top: 5px;
-} 
+}
+
 .rsuite-custom .rs-modal {
     margin: 36px auto 30px !important;
 }
@@ -566,25 +552,29 @@ body {
     border-color: #dee2e6;
 }
 
-.image-thumbnail{
+.image-thumbnail {
     width: 60px;
     height: 60px;
 }
 
-.theme-custom .swal2-title{
+.theme-custom .swal2-title {
     line-height: 1;
     font-size: 22px;
 }
-.theme-custom .swal2-html-container{
+
+.theme-custom .swal2-html-container {
     font-size: 16px !important;
 }
 
-.theme-custom .swal2-confirm.swal2-styled{
+.theme-custom .swal2-confirm.swal2-styled, .theme-custom .swal2-styled.swal2-deny {
     font-size: 14px;
-    background-color: #cc0000;
-} 
+}
 
-.theme-custom .swal2-popup{
+.theme-custom .swal2-confirm.swal2-styled {
+    background-color: #cc0000;
+}
+
+.theme-custom .swal2-popup {
     padding: 0px 0 1.7em;
 }
 
@@ -592,42 +582,43 @@ body {
     border-color: transparent;
     box-shadow: none;
 }
+
 .theme-custom .swal2-styled.swal2-confirm:focus, .theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-link:focus {
     box-shadow: 0 0 0 3px rgb(204 0 0 / 50%);
 }
 
 .theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-link {
-    color: inherit; 
+    color: inherit;
     text-decoration: none;
 
-} 
+}
 
-.theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-item{
+.theme-custom .pagination.react-bootstrap-table-page-btns-ul .page-item {
     color: #3C3A39;
 }
 
-.theme-custom .pagination.react-bootstrap-table-page-btns-ul .active.page-item{
+.theme-custom .pagination.react-bootstrap-table-page-btns-ul .active.page-item {
     color: #ffffff;
 }
 
-.title-step{
+.title-step {
     font-weight: 500;
     font-size: 21px;
     margin-bottom: 1.5rem;
 }
 
-.modal-no-connexion img{
+.modal-no-connexion img {
     width: 100px;
     margin-bottom: 1rem;
-} 
+}
 
-.modal-no-connexion .rs-modal-body{
+.modal-no-connexion .rs-modal-body {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.modal-no-connexion{
+.modal-no-connexion {
     padding-left: 2rem;
     padding-right: 2rem;
 }
@@ -639,20 +630,20 @@ body {
     font-weight: 600;
 }
 
-.input-password-theme{
+.input-password-theme {
     position: relative;
 }
 
-.btn-show-hide{
+.btn-show-hide {
     font-size: 16px;
     position: absolute;
     right: 15px;
     top: 10px;
     display: flex;
     color: #3c3a39b8;
-} 
+}
 
-.input-password-theme input[type=password]{ 
+.input-password-theme input[type=password] {
     -webkit-text-stroke-width: 0.2em;
     letter-spacing: 0.25em;
     padding-right: 3rem;
@@ -692,10 +683,10 @@ body {
     opacity: .7;
 }
 
-.btn-icon-theme-light{
+.btn-icon-theme-light {
     background: #b6b8ba;
     color: #ffffff;
-    font-size: 17px;
+    font-size: 20px;
     padding: 0px 10px;
     border-radius: 4px;
     display: flex;
@@ -703,7 +694,7 @@ body {
     justify-content: center;
 }
 
-.btn-icon-theme-light:hover{
+.btn-icon-theme-light:hover {
     color: #ffffff;
     text-decoration: none;
     background: #3c3a39;
