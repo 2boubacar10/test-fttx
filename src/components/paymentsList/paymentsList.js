@@ -42,8 +42,8 @@ const columns = [
         style: { width: 250 }
     },
     {
-        dataField: 'customer_name',
-        text: 'customer name',
+        dataField: 'status_name',
+        text: 'status name',
         sort: true,
         formatter: paymentStatus,
         style: { width: 250, textAlign: "center" }
