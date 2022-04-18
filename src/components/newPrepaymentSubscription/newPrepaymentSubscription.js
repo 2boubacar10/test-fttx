@@ -54,6 +54,7 @@ class NewPrepaymentSubscription extends Component {
             var api = this.state.api;
             const url = api + 'subscriptions';
             var config = this.state.requestConfig;
+
             var data = new FormData()
             data.append('civility', this.props.subscription.civility)
             data.append('firstname', this.props.subscription.firstname)

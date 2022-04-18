@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { fetchSubscriptionById } from '../../redux/Subscription/subscription-actions';
 import LoadingPage from '../loadingPage/index';
 import api from '../../config/global-vars';
-import axios from 'axios';
+// import axios from 'axios';
 import Swal from 'sweetalert2';
 
 class PaymentView extends Component {
@@ -39,6 +39,10 @@ class PaymentView extends Component {
 
     componentWillMount() {
         this.setState({ subscriptionFetchingProgress: true })
+        var userToken = this.state.userToken;
+        if (!userToken) {
+            window.location.reload()
+        }
     }
 
     changePercent(nextstep) {
@@ -66,9 +70,10 @@ class PaymentView extends Component {
 
     componentDidMount() {
         var config = this.state.requestConfig;
-        var subscriptionID = this.state.subscriptionID
+        var subscriptionID = this.state.subscriptionID;
+        var userToken = this.state.userToken;
 
-        if (subscriptionID && config) {
+        if (subscriptionID && userToken) {
             this.props.fetchSubscriptionById(subscriptionID, config)
         }
     }
@@ -160,8 +165,8 @@ class PaymentView extends Component {
         if (this.onValidateCustomerNumber()) {
             this.setState({ subscriptionPaymentByFreelancerInProcess: true })
 
-            var api = this.state.api;
-            var config = this.state.requestConfig;
+            // var api = this.state.api;
+            // var config = this.state.requestConfig;
             var paymentData = this.state.paymentData;
             paymentData['pin'] = this.state.secretCodeValue;
             paymentData['amount'] = this.state.totalMount;

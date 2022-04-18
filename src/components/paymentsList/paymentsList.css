@@ -1,0 +1,4 @@
+
+.component-payments-list .bootstrap-table-custom thead tr{
+    display: none;
+}

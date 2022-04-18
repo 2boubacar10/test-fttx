@@ -76,6 +76,10 @@ input:-webkit-autofill {
 	transition: opacity .15s linear;
 }
 
+.text-inprocess{
+	color: orange;
+}
+
 /* option:checked {
     background-color: #EF1E24 !important;
     color: #000000;

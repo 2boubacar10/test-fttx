@@ -13,6 +13,11 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import Dashboard from './components/dashboard/index';
 import PaymentView from './components/paymentView/index';
+import { Offline } from "react-detect-offline";
+import { Modal } from 'rsuite';
+import * as Sentry from "@sentry/react";
+import NetworkErrorIcon from "./images/icons/internet.svg"
+import PaymentsList from './components/paymentsList/index';
 
 class App extends Component {
     render() {
@@ -34,6 +39,9 @@ class App extends Component {
                             <Route path="/liste-des-souscriptions">
                                 {isLogInExpired || isLogInExpired === undefined ? <Redirect to={`/?next=${'/liste-des-souscriptions'}`} /> : <ListOfSubscriptionRequests />}
                             </Route>
+                            <Route path="/liste-des-paiements">
+                                {isLogInExpired || isLogInExpired === undefined ? <Redirect to={`/?next=${'/liste-des-paiements'}`} /> : <PaymentsList />}
+                            </Route>
                         </Switch >
                         <ReduxToastr
                             timeOut={2000}
@@ -47,9 +55,20 @@ class App extends Component {
                             closeOnToastrClick />
                     </div>
                 </Provider>
+
+                <Offline>
+                    <div className="modal-container">
+                        <Modal size="xs" open={true} backdrop={true} className="rsuite-content-modal-custom modal-no-connexion">
+                            <Modal.Body>
+                                <img src={NetworkErrorIcon} alt='' />
+                                <p>Un problème est survenue!<br />Veuillez vérifier votre connexion internet.</p>
+                            </Modal.Body>
+                        </Modal>
+                    </div>
+                </Offline>
             </Router >
         );
     }
 }
 
-export default App;
+export default Sentry.withProfiler(App);

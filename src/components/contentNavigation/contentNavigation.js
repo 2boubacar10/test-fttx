@@ -22,10 +22,13 @@ export default class ContentNavigation extends Component {
         return <div className="component-content-navigation">
             <ul>
                 <li>
-                    <NavLink to={"/liste-des-souscriptions"}>Liste des demandes de souscriptions</NavLink>
+                    <NavLink className={'trans-0-2'} to={"/dashboard"}>Tableau de bord</NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/souscription"}>Créer une demande de souscription</NavLink>
+                    <NavLink className={'trans-0-2'} to={"/liste-des-souscriptions"}>Liste des demandes de souscriptions</NavLink>
+                </li>
+                <li>
+                    <NavLink className={'trans-0-2'} to={"/souscription"}>Créer une demande de souscription</NavLink>
                 </li>
                 <li className='mt-5'>
                     <button onClick={this.onLogoutUser} className='logout-btn trans-0-2'><IoPower />Déconnexion</button>
