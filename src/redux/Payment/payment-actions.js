@@ -10,7 +10,7 @@ export const fetchPaymentsByFreelancer = (userId, config) => {
 
         dispatch({
             type: actionTypes.FETCH_PAYMENTS_BY_FREELANCER,
-            payload: data.data.reverse(),
+            payload: data.data,
         });
     }
 };

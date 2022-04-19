@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { fetchPaymentsByFreelancer } from '../../redux/Payment/payment-actions';
 import { NavLink } from 'react-router-dom';
 import Moment from 'react-moment';
+import LoadingPage from '../loadingPage/index';
 
 const { SearchBar } = Search;
 
@@ -21,7 +22,8 @@ function informations(cell, row) {
 
 function paymentStatus(cell, row) {
     return (<>
-        {cell === "PENDING" && <p className='mt-0 text-danger'>Echec {row.id && <NavLink className={'text-dark ms-3'} to={"/paiement/" + row.id}>Réessayer</NavLink>}</p>}
+        {cell === "FAILED" && <p className='mt-0 text-danger'>Echec {row.id && <NavLink className={'text-dark ms-3'} to={"/paiement/" + row.id}>Réessayer</NavLink>}</p>}
+        {cell === "PENDING" && <p className='text-secondary'>En cours</p>}
         {cell === "DONE" && <p className='text-success'>Envoyé</p>}
         {cell === "CANCELED" && <p className='text-danger'>Rejeté</p>}
     </>);
@@ -30,7 +32,7 @@ function paymentStatus(cell, row) {
 function PriceAndDate(cell, row) {
     return (<>
         <p>{Intl.NumberFormat('fr-FR').format(parseInt(row.ttc || 0))} FCFA</p>
-        <p className='mt-0 fs-12'><Moment format='DD/MM/YYYY'>{row.paid_at}</Moment></p>
+        {cell && <p className='mt-0 fs-12'><Moment format='DD/MM/YYYY'>{cell}</Moment></p>}
     </>);
 }
 
@@ -96,7 +98,7 @@ class PaymentsList extends Component {
 
     render() {
         if (this.state.fetchingPaymentProgress) {
-            return "chargement ....";
+            return <LoadingPage />;
         } else {
             const options = {
                 custom: true,

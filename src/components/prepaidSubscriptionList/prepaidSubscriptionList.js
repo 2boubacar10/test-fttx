@@ -15,6 +15,17 @@ function subscriptionDetails(cell, row) {
     );
 }
 
+function subscriptionStatus(cell, row) {
+    return (
+        <div className='adresse-container'>
+            {cell}
+            {row.statut_paiement_label === "DONE" && <span className='pastille-payment-status bg-success'></span>}
+            {row.statut_paiement_label === "PENDING" && <span className='pastille-payment-status bg-secondary'></span>}
+            {row.statut_paiement_label === "FAILED" || row.statut_paiement_label === "CANCELED" && <span className='pastille-payment-status bg-danger'></span>}
+        </div>
+    )
+}
+
 function phone(cell, row) {
     return "+" + cell;
 }
@@ -25,7 +36,7 @@ const columns = [
         text: 'Identifiant',
         formatter: subscriptionDetails,
         headerStyle: (colum, colIndex) => {
-            return { width: 130 };
+            return { width: 100 };
         }
     },
     {
@@ -54,6 +65,7 @@ const columns = [
     {
         dataField: 'address',
         text: 'Adresse',
+        formatter: subscriptionStatus,
         headerStyle: (colum, colIndex) => {
             return { width: 200 };
         }

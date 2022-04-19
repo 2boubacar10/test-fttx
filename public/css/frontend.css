@@ -361,6 +361,9 @@ body {
 
 .bootstrap-table-custom td {
     vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .bootstrap-table-custom .react-bootstrap-table {
@@ -698,4 +701,22 @@ body {
     color: #ffffff;
     text-decoration: none;
     background: #3c3a39;
+}
+
+.adresse-container {
+    position: relative;
+    padding-right: 3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.pastille-payment-status {
+    width: 20px;
+    height: 20px;
+    display: block;
+    border-radius: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
 }

@@ -1,13 +1,33 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import './contentNavigation.css';
-import { IoPower } from 'react-icons/io5'
+import { IoPower } from 'react-icons/io5';
+import { connect } from 'react-redux';
+import { fetchPaymentsByFreelancer } from '../../redux/Payment/payment-actions';
+import { IoHomeOutline, IoCreateOutline, IoCashOutline } from 'react-icons/io5';
 
-export default class ContentNavigation extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {};
-    // }
+class ContentNavigation extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userToken: window.localStorage.getItem('userToken'),
+            requestConfig: {
+                headers: { Authorization: `Bearer ${window.localStorage.getItem('userToken')}` }
+            },
+            userID: window.localStorage.getItem('userID'),
+        };
+    }
+
+    componentDidMount() {
+        var config = this.state.requestConfig;
+        var userID = this.state.userID;
+        var userToken = this.state.userToken;
+
+        if (userID && userToken) {
+            this.props.fetchPaymentsByFreelancer(userID, config)
+        }
+    }
+
 
     onLogoutUser = (e) => {
         e.preventDefault();
@@ -22,14 +42,16 @@ export default class ContentNavigation extends Component {
         return <div className="component-content-navigation">
             <ul>
                 <li>
-                    <NavLink className={'trans-0-2'} to={"/dashboard"}>Tableau de bord</NavLink>
+                    <NavLink className={'trans-0-2'} to={"/dashboard"}><IoHomeOutline /> Tableau de bord</NavLink>
                 </li>
                 <li>
-                    <NavLink className={'trans-0-2'} to={"/liste-des-souscriptions"}>Liste des demandes de souscriptions</NavLink>
+                    <NavLink className={'trans-0-2'} to={"/liste-des-souscriptions"}><IoCreateOutline />Souscription</NavLink>
                 </li>
-                <li>
-                    <NavLink className={'trans-0-2'} to={"/souscription"}>Créer une demande de souscription</NavLink>
-                </li>
+                {this.props.paymentsByFreelancer &&
+                    <li>
+                        <NavLink className={"trans-0-2"} to={"/liste-des-paiements"}><IoCashOutline />Paiement</NavLink>
+                    </li>
+                }
                 <li className='mt-5'>
                     <button onClick={this.onLogoutUser} className='logout-btn trans-0-2'><IoPower />Déconnexion</button>
                 </li>
@@ -37,3 +59,18 @@ export default class ContentNavigation extends Component {
         </div>;
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchPaymentsByFreelancer: (userId, config) => dispatch(fetchPaymentsByFreelancer(userId, config)),
+    };
+
+}
+
+const mapStateToProps = state => {
+    return {
+        paymentsByFreelancer: state.payments.paymentsByFreelancer,
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContentNavigation);
