@@ -58,7 +58,7 @@ class ListOfSubscriptionRequests extends Component {
     }
 
     render() {
-        if (this.state.fetchingSubscriptionProgress) {
+        if (this.state.fetchingSubscriptionProgress || 1 === 2) {
             return <LoadingPage />
         } else {
             return <div className="component-list-of-subscription-requests">

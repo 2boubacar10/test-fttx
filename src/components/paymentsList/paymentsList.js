@@ -97,7 +97,7 @@ class PaymentsList extends Component {
     }
 
     render() {
-        if (this.state.fetchingPaymentProgress) {
+        if (this.state.fetchingPaymentProgress || 1 === 2) {
             return <LoadingPage />;
         } else {
             const options = {
