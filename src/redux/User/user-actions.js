@@ -6,7 +6,7 @@ export const fetchUserConnected = (config) => {
         const url = api + 'user';
         const res = await fetch(url, { ...config, method: "POST" });
         const data = await res.json();
-
+        console.log('user', data)
         if (data) {
             window.localStorage.setItem('userID', data.id)
             window.localStorage.setItem('userFirstname', data.firstname)
