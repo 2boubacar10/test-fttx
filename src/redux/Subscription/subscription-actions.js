@@ -15,11 +15,12 @@ export const fetchAllSubscriptions = (config) => {
 };
 
 export const fetchParticularSubscriptionsByFreelancer = (userId, config) => {
+    console.log('data', userId, config)
     return async (dispatch) => {
         const url = api + 'user/' + userId + '/particularSubscriptions';
         const res = await fetch(url, config);
         const data = await res.json();
-
+        console.log('subscription', data)
         dispatch({
             type: actionTypes.FETCH_PARTICULAR_SUBSCRIPTION_BY_FREELANCER,
             payload: data.data,
