@@ -46,6 +46,7 @@ class ListOfSubscriptionRequests extends Component {
     }
 
     componentWillReceiveProps(prevProps) {
+        console.log('prev props', prevProps)
         if (prevProps.particularSubscriptions) {
             this.setState({ particularSubscriptions: prevProps.particularSubscriptions })
             setTimeout(() => {
@@ -58,7 +59,7 @@ class ListOfSubscriptionRequests extends Component {
     }
 
     render() {
-        if (this.state.fetchingSubscriptionProgress || 1 === 2) {
+        if (this.state.fetchingSubscriptionProgress) {
             return <LoadingPage />
         } else {
             return <div className="component-list-of-subscription-requests">
