@@ -16,6 +16,7 @@ const paymentMethod = [
     { name: "Cash" }
 ];
 
+
 class CreateSubscriptionRequest extends Component {
     constructor(props) {
         super(props);
@@ -481,8 +482,8 @@ class CreateSubscriptionRequest extends Component {
                     <h5 className='theme-title'>Nouvelle souscription</h5>
                     <nav>
                         <div className="theme-tabs nav nav-tabs  justify-content-center mt-4" id="nav-tab" role="tablist">
-                            <button onClick={(e) => this.navigationButtonSubscriptionButton(e, 'particulier')} className="nav-link" id="nav-particulier-tab" data-bs-toggle="tab" data-bs-target="#nav-particulier" type="button" role="tab" aria-controls="nav-particulier" aria-selected="true">Particulier</button>
-                            <button onClick={(e) => this.navigationButtonSubscriptionButton(e, 'professionnel')} className="nav-link active" id="nav-professionnel-tab" data-bs-toggle="tab" data-bs-target="#nav-professionnel" type="button" role="tab" aria-controls="nav-professionnel" aria-selected="false">Professionnel</button>
+                            <button onClick={(e) => this.navigationButtonSubscriptionButton(e, 'particulier')} className="nav-link active" id="nav-particulier-tab" data-bs-toggle="tab" data-bs-target="#nav-particulier" type="button" role="tab" aria-controls="nav-particulier" aria-selected="true">Particulier</button>
+                            <button onClick={(e) => this.navigationButtonSubscriptionButton(e, 'professionnel')} className="nav-link" id="nav-professionnel-tab" data-bs-toggle="tab" data-bs-target="#nav-professionnel" type="button" role="tab" aria-controls="nav-professionnel" aria-selected="false">Professionnel</button>
                         </div>
                     </nav>
                     <div className="tab-content pt-5" id="nav-tabContent">

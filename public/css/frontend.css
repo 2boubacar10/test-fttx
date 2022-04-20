@@ -720,3 +720,7 @@ body {
     top: 0;
     right: 0;
 }
+
+.component-create-subscription-request .rs-picker-toggle-clean.rs-btn-close {
+    display: none;
+}
