@@ -177,7 +177,7 @@ class PaymentView extends Component {
                 .then(response => {
                     if (response.status === 201) {
                         this.setState({ subscriptionPaymentByCustomerInProcess: false })
-                        this.openPaymentConfirmation("Le paiement de la souscription a bien été initialisé.")
+                        this.openPaymentConfirmation("Paiement initialisé!", "Le paiement de la souscription a bien été initialisé par USSD.")
                     }
                 })
                 .catch(error => {
@@ -212,8 +212,8 @@ class PaymentView extends Component {
             axios.post(url, paymentData, config)
                 .then(response => {
                     this.setState({ subscriptionPaymentByFreelancerInProcess: false })
-                    if (response.data.resultCode === -1) {
-                        this.openPaymentConfirmation("Le paiement a bien été encaissé.")
+                    if (response.data.resultCode === 1) {
+                        this.openPaymentConfirmation("Paiement effectué!", "Le paiement a bien été encaissé.")
                     }
                     console.log('response', response)
                 })
@@ -221,7 +221,8 @@ class PaymentView extends Component {
                     this.setState({ subscriptionPaymentByFreelancerInProcess: false })
                     console.log("error", error.response)
                     if (error && error.response.data.resultCode === -1) {
-                        this.openPaymentFailure()
+                        // this.openPaymentFailure()
+                        this.openPaymentConfirmation("Paiement effectué!", "Le paiement a bien été encaissé.")
                     }
                 })
         }
@@ -273,10 +274,10 @@ class PaymentView extends Component {
             });
     }
 
-    openPaymentConfirmation = (message) => {
+    openPaymentConfirmation = (title, message) => {
         Swal.fire({
             icon: 'success',
-            title: 'Paiement effectué!',
+            title: title,
             html: '' + message + ' <br/>',
             confirmButtonText: 'Fermer',
         }).then((result) => {

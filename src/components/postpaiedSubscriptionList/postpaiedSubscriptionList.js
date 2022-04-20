@@ -19,12 +19,9 @@ function subscriptionStatus(cell, row) {
     return (
         <div className='adresse-container'>
             {cell}
-            <div className='adresse-container'>
-                {cell}
-                {row.statut_paiement_label === "DONE" && <span className='pastille-payment-status bg-success'></span>}
-                {row.statut_paiement_label === "PENDING" && <span className='pastille-payment-status bg-secondary'></span>}
-                {row.statut_paiement_label === "FAILED" || row.statut_paiement_label === "CANCELED" && <span className='pastille-payment-status bg-danger'></span>}
-            </div>
+            {row.statut_paiement_label === "PENDING" && <span className='pastille-payment-status bg-success'></span>}
+            {/* {row.statut_paiement_label === "PENDING" && <span className='pastille-payment-status bg-secondary'></span>}
+                {(row.statut_paiement_label === "FAILED" || row.statut_paiement_label === "CANCELED") && <span className='pastille-payment-status bg-danger'></span>} */}
         </div>
     )
 }

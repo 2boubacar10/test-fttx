@@ -94,7 +94,7 @@ export default class PrepaymentSubscriptionFields extends Component {
                 </div>
                 <div className="col-sm-6 mb-4">
                     <div className="form-group">
-                        <label htmlFor="building_id" className="form-label">Immeuble</label>
+                        <label htmlFor="building_id" className="form-label">Plaque</label>
                         <SelectPicker
                             disabled={this.props.buildings.length > 0 ? false : true}
                             data={this.props.buildings || []}
@@ -110,7 +110,7 @@ export default class PrepaymentSubscriptionFields extends Component {
                             valueKey="id"
                             style={{ width: "100%" }}
                             className={`check-picker-custom-input ${this.props.is_empty_building_id && 'is-invalid-custom'}`}
-                            placeholder={'Séléctionner l\'immeuble'}
+                            placeholder={'Séléctionner la plaque'}
                             value={this.props.subscription.building_id}
                         />
                     </div>

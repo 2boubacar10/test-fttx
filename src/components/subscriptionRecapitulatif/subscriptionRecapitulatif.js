@@ -62,7 +62,7 @@ export default class SubscriptionRecapitulatif extends Component {
                         <td className='text-capitalize value'>{this.props.subscription.address}</td>
                     </tr>
                     <tr>
-                        <td className='fw-600'>Immeuble</td>
+                        <td className='fw-600'>Plaque</td>
                         <td className='text-capitalize value'>{this.props.subscription.building_name}</td>
                     </tr>
                     <tr>
