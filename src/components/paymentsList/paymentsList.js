@@ -24,7 +24,7 @@ function paymentStatus(cell, row) {
     return (<>
         {cell === "FAILED" && <p className='mt-0 text-danger'>Echec {row.id && <NavLink className={'text-dark ms-3'} to={"/paiement/" + row.id}>Réessayer</NavLink>}</p>}
         {cell === "PENDING" && <p className='text-secondary'>En cours</p>}
-        {cell === "PENDING" && <p className='text-success'>Envoyé</p>}
+        {cell === "DONE" && <p className='text-success'>Envoyé</p>}
         {cell === "CANCELED" && <p className='text-danger'>Rejeté</p>}
     </>);
 }
