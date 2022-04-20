@@ -170,7 +170,6 @@ class PaymentView extends Component {
             paymentData['subscription_number'] = subscription.number;
             paymentData['phone_number'] = paymentData.customer_number;
 
-            console.log('pay', paymentData)
             this.setState({ paymentData })
 
             axios.post(url, paymentData, config)
@@ -221,8 +220,7 @@ class PaymentView extends Component {
                     this.setState({ subscriptionPaymentByFreelancerInProcess: false })
                     console.log("error", error.response)
                     if (error && error.response.data.resultCode === -1) {
-                        // this.openPaymentFailure()
-                        this.openPaymentConfirmation("Paiement effectué!", "Le paiement a bien été encaissé.")
+                        this.openPaymentFailure()
                     }
                 })
         }
