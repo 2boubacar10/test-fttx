@@ -20,36 +20,3 @@ export const fetchUserConnected = (config) => {
         });
     }
 };
-
-
-
-// onGetConnectedUserInfos = (config) => {
-//     var api = this.state.api
-//     var baseUrl = this.state.baseUrl
-
-//     axios.get(api + 'auth/me', config)
-//         .then(response => {
-//             this.setState({ loginInProgress: false })
-//             if (response.status === 200) {
-//                 window.localStorage.setItem('userID', response.data.id)
-//                 window.localStorage.setItem('userFirstname', response.data.firstname)
-//                 window.localStorage.setItem('userLastname', response.data.lastname)
-//                 window.localStorage.setItem('userFullname', response.data.firstname + ' ' + response.data.lastname)
-//                 window.localStorage.setItem('userEmail', response.data.email)
-//                 window.localStorage.setItem('userType', response.data.role)
-//                 window.localStorage.setItem('userStatus', response.data.is_active)
-
-//                 setTimeout(() => {
-//                     this.setState({ loginInProgress: false })
-//                     if (this.state.path !== undefined && this.state.path !== '/connexion') {
-//                         window.location = this.state.path
-//                     }
-//                     else if (window.location.href === `${baseUrl}/connexion`) {
-//                         window.location = "/boutique"
-//                     }
-//                     else { window.location.reload() }
-
-//                 }, 500);
-
-//             }
-//         })

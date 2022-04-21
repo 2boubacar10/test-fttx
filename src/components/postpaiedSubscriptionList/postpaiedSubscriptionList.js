@@ -5,7 +5,7 @@ import paginationFactory, { PaginationProvider, PaginationListStandalone } from 
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import CustomerSubscriptionDetails from '../customerSubscriptionDetails/index';
 import { NavLink } from 'react-router-dom';
-import { ImFileText2 } from 'react-icons/im';
+import { BsFileEarmarkPlus } from 'react-icons/bs';
 
 const { SearchBar } = Search;
 
@@ -13,6 +13,17 @@ function subscriptionDetails(cell, row) {
     return (
         <CustomerSubscriptionDetails subscription={row} />
     );
+}
+
+function subscriptionStatus(cell, row) {
+    return (
+        <div className='adresse-container'>
+            {cell}
+            {row.statut_paiement_label === "DONE" && <span className='pastille-payment-status bg-success'></span>}
+            {row.statut_paiement_label === "PENDING" && <span className='pastille-payment-status bg-secondary'></span>}
+            {(row.statut_paiement_label === "FAILED" || row.statut_paiement_label === "CANCELED") && <span className='pastille-payment-status bg-danger'></span>}
+        </div>
+    )
 }
 
 function phone(cell, row) {
@@ -25,7 +36,7 @@ const columns = [
         text: 'Identifiant',
         formatter: subscriptionDetails,
         headerStyle: (column, colIndex) => {
-            return { width: 130 };
+            return { width: 100 };
         }
     },
     {
@@ -53,6 +64,7 @@ const columns = [
     {
         dataField: 'address',
         text: 'Adresse',
+        formatter: subscriptionStatus,
         headerStyle: (column, colIndex) => {
             return { width: 200 };
         }
@@ -99,7 +111,7 @@ export default class PostpaiedSubscriptionList extends Component {
                                         placeholder={"Rechercher ..."}
                                         className={"w-auto"}
                                     />
-                                    <NavLink to={"/souscription"} className={"btn-icon-theme-light trans-0-2"}><ImFileText2 /></NavLink>
+                                    <NavLink to={"/souscription"} className={"btn-icon-theme-light trans-0-2"}><BsFileEarmarkPlus /></NavLink>
                                 </div>
                                 <BootstrapTable
                                     striped

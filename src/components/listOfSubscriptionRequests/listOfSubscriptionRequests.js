@@ -46,6 +46,7 @@ class ListOfSubscriptionRequests extends Component {
     }
 
     componentWillReceiveProps(prevProps) {
+        console.log('prev props', prevProps)
         if (prevProps.particularSubscriptions) {
             this.setState({ particularSubscriptions: prevProps.particularSubscriptions })
             setTimeout(() => {

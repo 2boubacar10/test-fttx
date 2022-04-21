@@ -32,7 +32,7 @@ export default class PrepaymentSubscriptionRecapitulatif extends Component {
                         <td>{this.props.subscription.address}</td>
                     </tr>
                     <tr>
-                        <td className='fw-600'>Immeuble</td>
+                        <td className='fw-600'>Plaque</td>
                         <td>{this.props.subscription.building_name}</td>
                     </tr>
                     <tr>

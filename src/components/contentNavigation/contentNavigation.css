@@ -9,18 +9,24 @@
 }
 
 .component-content-navigation a {
-    color: #b6b8ba;
+    color: #3c3a39d0;
     font-family: "Montserrat", sans-serif;
     text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
 .component-content-navigation a:hover,
-.component-content-navigation a:focus
- {
+.component-content-navigation a:focus {
     text-decoration: none;
     color: #3c3a39;
 }
 
 .component-content-navigation a.active {
     color: #3c3a39
+}
+
+.component-content-navigation a>svg {
+    font-size: 21px;
+    margin-right: 10px;
 }

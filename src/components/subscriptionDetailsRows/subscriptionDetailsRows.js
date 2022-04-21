@@ -67,7 +67,7 @@ export default class SubscriptionDetailsRows extends Component {
                         <td className='text-capitalize td-value'>{subscription.address}</td>
                     </tr>
                     <tr>
-                        <td className='fw-600'>Immeuble</td>
+                        <td className='fw-600'>Plaque</td>
                         <td className='text-capitalize td-value'>{subscription.building ? subscription.building.name : subscription.building_id}</td>
                     </tr>
                     <tr>
